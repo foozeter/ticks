@@ -60,6 +60,7 @@ class Timer(
     fun pause() {
         if (started && isWorking) {
             isWorking = false
+            updateLeftTime()
             callback?.onPause(id)
         }
     }
@@ -89,13 +90,13 @@ class Timer(
 
     override fun onOscillate() {
         if (isWorking) {
-            leftTime = endTime - rap()
+            updateLeftTime()
             if (quartz.period < leftTime) {
                 postDelayed(nextTickTime - rap()) {
                     // If the timer is paused at this time,
                     // this post will be ignored.
                     if (isWorking) {
-                        leftTime = endTime - rap()
+                        updateLeftTime()
                         callback?.onTick(id, leftTime)
                     }
                 }
@@ -110,6 +111,10 @@ class Timer(
     }
 
     private fun rap() = SystemClock.elapsedRealtime()
+
+    private fun updateLeftTime() {
+        leftTime = endTime - rap()
+    }
 
     private fun stop() {
         started = false
