@@ -93,9 +93,7 @@ class Timer(
                 postDelayed(nextTickTime - rap()) {
                     // If the timer is paused at this time,
                     // this post will be ignored.
-                    if (isWorking) {
-                        callback?.onTick(id, left)
-                    }
+                    if (isWorking) callback?.onTick(id, rapLeft())
                 }
                 nextTickTime += quartz.period
             } else {
