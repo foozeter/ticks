@@ -68,6 +68,16 @@ class TicksActivity : AppCompatActivity() {
 
         val timer = Timer(quartz)
         timer.setCallback(TestTimerCallback())
+
+        timer.setCallback {
+            onStart {
+                Log.d("mylog", "onStart")
+            }
+            onFinish {
+                Log.d("mylog", "onFinish")
+            }
+        }
+
         button2.setOnClickListener {
             if (timer.started) {
                 if (timer.isWorking) timer.pause()

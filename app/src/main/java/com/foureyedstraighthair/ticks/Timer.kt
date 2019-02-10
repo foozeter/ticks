@@ -82,6 +82,9 @@ class Timer(
         this.callback = callback
     }
 
+    fun setCallback(config: CallbackBuilder.() -> Unit)
+            = setCallback(CallbackBuilder().apply(config).build())
+
     fun removeCallback() {
         callback = null
     }
@@ -125,5 +128,48 @@ class Timer(
         fun onCancelled(timerID: Long)
         fun onFinish(timerID: Long)
         fun onTick(timerID: Long, left: Long)
+    }
+
+    class CallbackBuilder {
+
+        private var onStartListener = {_: Long -> }
+        private var onPauseListener = {_: Long -> }
+        private var onResumeListener = {_: Long -> }
+        private var onCancelledListener = {_: Long -> }
+        private var onFinishListener = {_: Long -> }
+        private var onTickListener = {_: Long, _: Long -> }
+
+        fun onStart(listener: (timerID: Long) -> Unit) {
+            onStartListener = listener
+        }
+
+        fun onPause(listener: (timerID: Long) -> Unit) {
+            onPauseListener = listener
+        }
+
+        fun onResume(listener: (timerID: Long) -> Unit) {
+            onResumeListener = listener
+        }
+
+        fun onCancelled(listener: (timerID: Long) -> Unit) {
+            onCancelledListener = listener
+        }
+
+        fun onFinish(listener: (timerID: Long) -> Unit) {
+            onFinishListener = listener
+        }
+
+        fun onTick(listener: (timerID: Long, left: Long) -> Unit) {
+            onTickListener = listener
+        }
+
+        fun build() = object: Callback {
+            override fun onStart(timerID: Long) = onStartListener(timerID)
+            override fun onPause(timerID: Long) = onPauseListener(timerID)
+            override fun onResume(timerID: Long) = onResumeListener(timerID)
+            override fun onCancelled(timerID: Long) = onCancelledListener(timerID)
+            override fun onFinish(timerID: Long) = onFinishListener(timerID)
+            override fun onTick(timerID: Long, left: Long) = onTickListener(timerID, left)
+        }
     }
 }
