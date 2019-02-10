@@ -35,8 +35,25 @@ class TicksActivity : AppCompatActivity() {
 
         var baseID = 0L
         timer_start.setOnClickListener {
-            val timer = Timer(quartz, 10000)
+            val timer = Timer(quartz)
+            timer.id = ++baseID
             timer.setCallback(object: Timer.Callback {
+
+                override fun onPause(timerID: Long) {
+                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                }
+
+                override fun onResume(timerID: Long) {
+                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                }
+
+                override fun onCancelled(timerID: Long) {
+                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                }
+
+                override fun onStart(timerID: Long) {
+
+                }
 
                 override fun onTick(timerID: Long, left: Long) {
                     Log.d("mylog", "left=${left}ms ID@$timerID")
@@ -46,7 +63,18 @@ class TicksActivity : AppCompatActivity() {
                     Log.d("mylog", "finish ID@$timerID")
                 }
             })
-            timer.start(++baseID)
+            timer.start(10000)
+        }
+
+        val timer = Timer(quartz)
+        timer.setCallback(TestTimerCallback())
+        button2.setOnClickListener {
+            if (timer.started) {
+                if (timer.isWorking) timer.pause()
+                else timer.resume()
+            } else {
+                timer.start(10000)
+            }
         }
     }
 
