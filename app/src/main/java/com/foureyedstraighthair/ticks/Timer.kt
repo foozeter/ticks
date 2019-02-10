@@ -4,13 +4,12 @@ import android.os.Handler
 import android.os.SystemClock
 
 class Timer(
-    private val quartz: Quartz,
-    private val millisInFuture: Long): Quartz.OnOscillateListener {
+    private val quartz: Quartz): Quartz.OnOscillateListener {
     private val handler = Handler()
     private var startTime = 0L
     private var endTime = 0L
     private var nextTickTime = 0L
-    private var leftTime = 0L
+    private var savedLeftTime = 0L
     private var callback: Callback? = null
 
     var started = false; private set
@@ -30,20 +29,19 @@ class Timer(
         scrap()
     }
 
-    private fun prepare() {
-        if (!started) leftTime = millisInFuture
+    private fun prepare(millisInFuture: Long) {
         startTime = rap()
-        endTime = startTime + leftTime
+        endTime = startTime + millisInFuture
         nextTickTime = startTime + quartz.period
     }
 
-    fun start() {
+    fun start(millisInFuture: Long) {
         if (quartz.isAlreadyActivated) when {
 
                 started -> return
 
                 0 < millisInFuture -> {
-                    prepare()
+                    prepare(millisInFuture)
                     started = true
                     isWorking = true
                     callback?.onStart(id)
@@ -59,15 +57,15 @@ class Timer(
 
     fun pause() {
         if (started && isWorking) {
+            savedLeftTime = rapLeft()
             isWorking = false
-            updateLeftTime()
             callback?.onPause(id)
         }
     }
 
     fun resume() {
         if (started && !isWorking) {
-            prepare()
+            prepare(savedLeftTime)
             isWorking = true
             callback?.onResume(id)
         }
@@ -90,20 +88,19 @@ class Timer(
 
     override fun onOscillate() {
         if (isWorking) {
-            updateLeftTime()
-            if (quartz.period < leftTime) {
+            val left = rapLeft()
+            if (quartz.period < left) {
                 postDelayed(nextTickTime - rap()) {
                     // If the timer is paused at this time,
                     // this post will be ignored.
                     if (isWorking) {
-                        updateLeftTime()
-                        callback?.onTick(id, leftTime)
+                        callback?.onTick(id, left)
                     }
                 }
                 nextTickTime += quartz.period
             } else {
                 stop()
-                postDelayed(leftTime) {
+                postDelayed(left) {
                     callback?.onFinish(id)
                 }
             }
@@ -112,9 +109,7 @@ class Timer(
 
     private fun rap() = SystemClock.elapsedRealtime()
 
-    private fun updateLeftTime() {
-        leftTime = endTime - rap()
-    }
+    private fun rapLeft() = endTime - rap()
 
     private fun stop() {
         started = false
