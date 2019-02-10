@@ -29,12 +29,6 @@ class Timer(
         scrap()
     }
 
-    private fun prepare(millisInFuture: Long) {
-        startTime = rap()
-        endTime = startTime + millisInFuture
-        nextTickTime = startTime + quartz.period
-    }
-
     fun start(millisInFuture: Long) {
         if (quartz.isAlreadyActivated) when {
 
@@ -106,6 +100,12 @@ class Timer(
                 }
             }
         }
+    }
+
+    private fun prepare(millisInFuture: Long) {
+        startTime = rap()
+        endTime = startTime + millisInFuture
+        nextTickTime = startTime + quartz.period
     }
 
     private fun rap() = SystemClock.elapsedRealtime()
