@@ -7,19 +7,22 @@ class Timer(
     private val quartz: Quartz,
     private val millisInFuture: Long): Quartz.OnOscillateListener {
     private val handler = Handler()
-    private var id = 0L
     private var startTime = 0L
     private var endTime = 0L
     private var nextTickTime = 0L
     private var leftTime = 0L
-    private var isWorking = false
     private var callback: Callback? = null
+
+    var started = false; private set
+    var isWorking = false; private set
+    var id = 0L
 
     init {
         quartz.addOnOscillateListener(this)
     }
 
     fun scrap() {
+        stop()
         quartz.removeOnOscillateListener(this)
     }
 
@@ -27,35 +30,53 @@ class Timer(
         scrap()
     }
 
-    private fun prepare(timerID: Long) {
-        id = timerID
+    private fun prepare() {
+        if (!started) leftTime = millisInFuture
         startTime = rap()
-        endTime = startTime + millisInFuture
+        endTime = startTime + leftTime
         nextTickTime = startTime + quartz.period
-        leftTime = millisInFuture
     }
 
-    fun start(timerID: Long) {
+    fun start() {
         if (quartz.isAlreadyActivated) when {
 
-                isWorking -> return
+                started -> return
 
                 0 < millisInFuture -> {
-                    prepare(timerID)
+                    prepare()
+                    started = true
                     isWorking = true
-                    callback?.onTick(id, leftTime)
+                    callback?.onStart(id)
                 }
 
                 else -> {
-                    callback?.onFinish(timerID)
+                    callback?.onFinish(id)
                 }
 
         } else throw IllegalStateException(
             "The quartz must be activated at this time.")
     }
 
-    fun stop() {
-        isWorking = false
+    fun pause() {
+        if (started && isWorking) {
+            isWorking = false
+            callback?.onPause(id)
+        }
+    }
+
+    fun resume() {
+        if (started && !isWorking) {
+            prepare()
+            isWorking = true
+            callback?.onResume(id)
+        }
+    }
+
+    fun cancel() {
+        if (started) {
+            stop()
+            callback?.onCancelled(id)
+        }
     }
 
     fun setCallback(callback: Callback) {
@@ -71,8 +92,12 @@ class Timer(
             leftTime = endTime - rap()
             if (quartz.period < leftTime) {
                 postDelayed(nextTickTime - rap()) {
-                    leftTime = endTime - rap()
-                    callback?.onTick(id, leftTime)
+                    // If the timer is paused at this time,
+                    // this post will be ignored.
+                    if (isWorking) {
+                        leftTime = endTime - rap()
+                        callback?.onTick(id, leftTime)
+                    }
                 }
                 nextTickTime += quartz.period
             } else {
@@ -86,12 +111,21 @@ class Timer(
 
     private fun rap() = SystemClock.elapsedRealtime()
 
+    private fun stop() {
+        started = false
+        isWorking = false
+    }
+
     private fun postDelayed(delay: Long, runnable: () -> Unit) {
         handler.postDelayed(runnable, delay)
     }
 
     interface Callback {
-        fun onTick(timerID: Long, left: Long)
+        fun onStart(timerID: Long)
+        fun onPause(timerID: Long)
+        fun onResume(timerID: Long)
+        fun onCancelled(timerID: Long)
         fun onFinish(timerID: Long)
+        fun onTick(timerID: Long, left: Long)
     }
 }
