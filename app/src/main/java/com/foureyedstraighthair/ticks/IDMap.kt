@@ -36,6 +36,11 @@ class IDMap<T> {
 
     fun isNotEmpty() = map.isNotEmpty()
 
+    fun has(check: (entity: T) -> Boolean): Boolean {
+        map.forEach { if (check(it.value)) return true }
+        return false
+    }
+
     private fun obtainID()
             = recycledIDs.pop() ?: ++nextID
 

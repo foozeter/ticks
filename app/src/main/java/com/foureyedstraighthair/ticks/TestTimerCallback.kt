@@ -3,13 +3,14 @@ package com.foureyedstraighthair.ticks
 import android.os.SystemClock
 import android.util.Log
 
-class TestTimerCallback: Timer.Callback {
-
-    private var tag = TestTimerCallback::class.java.simpleName
+open class TestTimerCallback(
+    private val tag: String) : Timer.Callback {
     private var startTime = 0L
     private var prevTickTime = 0L
     private var pausedTime = 0L
     private var totalPausedTime = 0L
+
+    constructor() : this(TestTimerCallback::class.java.simpleName)
 
     override fun onPause(timerID: Long) {
         pausedTime = SystemClock.elapsedRealtime()

@@ -1,6 +1,7 @@
 package com.foureyedstraighthair.ticks
 
-import android.os.*
+import android.os.Bundle
+import android.os.SystemClock
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import kotlinx.android.synthetic.main.activity_ticks.*
@@ -26,69 +27,56 @@ class TicksActivity : AppCompatActivity() {
 //            it.registerCallback(callback)
 //        }
 //
-//        timer_start.setOnClickListener {
-//            binder?.startTimer(10000, 1000)
-//        }
+        val prevTickTimes = mutableMapOf<Long, Long>()
+        val notWorkingTimerIDList = mutableListOf<Long>()
+        val workingTimerIDList = mutableListOf<Long>()
+        val multiTimer = MultiTimer(1000)
 
-//        quartz.addOnOscillateListener(listener)
-        quartz.activate()
+        multiTimer.setCallback(object: TestMultiTimerCallback() {
 
-        var baseID = 0L
-        timer_start.setOnClickListener {
-            val timer = Timer(quartz)
-            timer.id = ++baseID
-            timer.setCallback(object: Timer.Callback {
-
-                override fun onPause(timerID: Long) {
-                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-                }
-
-                override fun onResume(timerID: Long) {
-                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-                }
-
-                override fun onCancelled(timerID: Long) {
-                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-                }
-
-                override fun onStart(timerID: Long) {
-
-                }
-
-                override fun onTick(timerID: Long, left: Long) {
-                    Log.d("mylog", "left=${left}ms ID@$timerID")
-                }
-
-                override fun onFinish(timerID: Long) {
-                    Log.d("mylog", "finish ID@$timerID")
-                }
-            })
-            timer.start(10000)
-        }
-
-        val timer = Timer(quartz)
-        timer.setCallback(TestTimerCallback())
-
-        timer.setCallback {
-            onStart {
-                Log.d("mylog", "onStart")
+            override fun onStart(timerID: Long) {
+                super.onStart(timerID)
+                prevTickTimes[timerID] = SystemClock.elapsedRealtime()
+                workingTimerIDList.add(timerID)
             }
-            onFinish {
-                Log.d("mylog", "onFinish")
+
+            override fun onPause(timerID: Long) {
+                super.onPause(timerID)
+                workingTimerIDList.remove(timerID)
+                notWorkingTimerIDList.add(timerID)
             }
+
+            override fun onResume(timerID: Long) {
+                super.onResume(timerID)
+                notWorkingTimerIDList.remove(timerID)
+                workingTimerIDList.add(timerID)
+            }
+
+            override fun onFinish(timerID: Long) {
+                super.onFinish(timerID)
+                notWorkingTimerIDList.remove(timerID)
+                workingTimerIDList.remove(timerID)
+                prevTickTimes.remove(timerID)
+                multiTimer.scrap(timerID)
+            }
+        })
+
+        button1.setOnClickListener {
+            multiTimer.start(20 * 60 * 1000L)
         }
 
         button2.setOnClickListener {
-            if (timer.started) {
-                if (timer.isWorking) timer.pause()
-                else timer.resume()
-            } else {
-                timer.start(10000)
+            if (workingTimerIDList.isNotEmpty()) {
+                multiTimer.pause(workingTimerIDList.last())
+            }
+        }
+
+        button3.setOnClickListener {
+            if (notWorkingTimerIDList.isNotEmpty()) {
+                multiTimer.resume(notWorkingTimerIDList.last())
             }
         }
     }
-
-    val quartz = Quartz()
 
 //    override fun onStop() {
 //        Log.d("mylog", "onStop")
@@ -115,11 +103,6 @@ class TicksActivity : AppCompatActivity() {
             prevTime = t
             Log.d("mylog", "interval = ${d}ms, elapsedTime = ${(t - startTime) / 1000.0}s")
         }
-    }
-
-    override fun onStop() {
-        super.onStop()
-        quartz.quit()
     }
 
     private val callback = object: TicksService.Callback {
