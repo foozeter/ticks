@@ -15,104 +15,74 @@ class TicksActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ticks)
 
-//        connection = TicksService.makeConnection(this) {
-//            onBindingDied { Log.d("mylog", "onBindingDied()") }
-//            onDisconnected { Log.d("mylog", "onDisconnected()") }
-//            onNullBinding { Log.d("mylog", "onNullBinding()") }
-//        }
-//
-//        connection.connect {
-//            Log.d("mylog", "connected!")
-//            binder = it
-//            it.registerCallback(callback)
-//        }
-//
-        val prevTickTimes = mutableMapOf<Long, Long>()
-        val notWorkingTimerIDList = mutableListOf<Long>()
-        val workingTimerIDList = mutableListOf<Long>()
-        val multiTimer = MultiTimer(1000)
-
-        multiTimer.setCallback(object: TestMultiTimerCallback() {
-
-            override fun onStart(timerID: Long) {
-                super.onStart(timerID)
-                prevTickTimes[timerID] = SystemClock.elapsedRealtime()
-                workingTimerIDList.add(timerID)
-            }
-
-            override fun onPause(timerID: Long) {
-                super.onPause(timerID)
-                workingTimerIDList.remove(timerID)
-                notWorkingTimerIDList.add(timerID)
-            }
-
-            override fun onResume(timerID: Long) {
-                super.onResume(timerID)
-                notWorkingTimerIDList.remove(timerID)
-                workingTimerIDList.add(timerID)
-            }
-
-            override fun onFinish(timerID: Long) {
-                super.onFinish(timerID)
-                notWorkingTimerIDList.remove(timerID)
-                workingTimerIDList.remove(timerID)
-                prevTickTimes.remove(timerID)
-                multiTimer.scrap(timerID)
-            }
-        })
+        connection = TicksService.makeConnection(this) {
+            onBindingDied { Log.d("mylog", "onBindingDied()") }
+            onDisconnected { Log.d("mylog", "onDisconnected()") }
+            onNullBinding { Log.d("mylog", "onNullBinding()") }
+        }
 
         button1.setOnClickListener {
-            multiTimer.start(20 * 60 * 1000L)
+            binder?.startTimer(20 * 60 * 1000L)
         }
 
         button2.setOnClickListener {
             if (workingTimerIDList.isNotEmpty()) {
-                multiTimer.pause(workingTimerIDList.last())
+                binder?.pauseTimer(workingTimerIDList.last())
             }
         }
 
         button3.setOnClickListener {
             if (notWorkingTimerIDList.isNotEmpty()) {
-                multiTimer.resume(notWorkingTimerIDList.last())
+                binder?.resumeTimer(notWorkingTimerIDList.last())
             }
         }
     }
 
-//    override fun onStop() {
-//        Log.d("mylog", "onStop")
-//        super.onStop()
-//        binder?.unregisterCallback(callback)
-//        connection.disconnect()
-//    }
-
-    val listener = object: Quartz.OnOscillateListener {
-
-        var first = true
-        var startTime = 0L
-        var prevTime = 0L
-
-        override fun onOscillate() {
-            val t = SystemClock.elapsedRealtime()
-            if (first) {
-                prevTime = t
-                startTime = t
-
-                first = false
-            }
-            val d = t - prevTime
-            prevTime = t
-            Log.d("mylog", "interval = ${d}ms, elapsedTime = ${(t - startTime) / 1000.0}s")
+    override fun onStart() {
+        super.onStart()
+        connection.connect {
+            Log.d("mylog", "connected!")
+            binder = it
+            it.registerCallback(TestMultiTimerCallback())
         }
     }
 
-    private val callback = object: TicksService.Callback {
+    override fun onStop() {
+        super.onStop()
+        binder?.unregisterCallback(callback)
+        connection.disconnect()
+    }
 
-        override fun onTick(timerID: Long, remainingMillis: Long) {
-            Log.d("mylog", "left=${remainingMillis}ms ID@$timerID")
+    val prevTickTimes = mutableMapOf<Long, Long>()
+    val notWorkingTimerIDList = mutableListOf<Long>()
+    val workingTimerIDList = mutableListOf<Long>()
+
+    private val callback = object: TestMultiTimerCallback() {
+
+        override fun onStart(timerID: Long) {
+            super.onStart(timerID)
+            prevTickTimes[timerID] = SystemClock.elapsedRealtime()
+            workingTimerIDList.add(timerID)
+        }
+
+        override fun onPause(timerID: Long) {
+            super.onPause(timerID)
+            workingTimerIDList.remove(timerID)
+            notWorkingTimerIDList.add(timerID)
+        }
+
+        override fun onResume(timerID: Long) {
+            super.onResume(timerID)
+            notWorkingTimerIDList.remove(timerID)
+            workingTimerIDList.add(timerID)
         }
 
         override fun onFinish(timerID: Long) {
-            Log.d("mylog", "finish! ID@$timerID")
+            super.onFinish(timerID)
+            notWorkingTimerIDList.remove(timerID)
+            workingTimerIDList.remove(timerID)
+            prevTickTimes.remove(timerID)
+            binder?.scrapTimer(timerID)
         }
     }
 }

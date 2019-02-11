@@ -1,23 +1,18 @@
 package com.foureyedstraighthair.ticks
 
 import android.app.Service
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.content.ServiceConnection
-import android.os.*
+import android.os.Binder
+import android.os.Handler
+import android.os.IBinder
 import android.util.Log
-import java.lang.ref.WeakReference
 
 class TicksService: Service() {
 
-    @Volatile private lateinit var countDownLooper: Looper
-    private val binder = LocalService()
-    private var boundClientsCount = 0
-
     companion object {
 
-        private const val SHUTDOWN_DELAY = 50000L
+        private const val TIMER_TICK_PERIOD = 1000L
 
         fun makeConnection(context: Context)
                 = makeConnection(context) {}
@@ -26,110 +21,48 @@ class TicksService: Service() {
                 = Connection(context).apply(init)
     }
 
-    class Connection(private val context: Context) {
+    class Connection(context: Context)
+        : ServiceConnectionHelper<LocalService>
+        (context, TicksService::class.java) {
 
-        private var onConnectedListener = {_: LocalService -> }
-        private var onDisconnectedListener = {}
-        private var onBindingDiedListener = {}
-        private var onNullBindingListener = {}
-        var isConnected = false; private set
-        var binder: LocalService? = null; private set
-
-        private val connectionListener = object: ServiceConnection {
-
-            override fun onServiceDisconnected(name: ComponentName) {
-                isConnected = false
-                binder = null
-                onDisconnectedListener()
-            }
-
-            override fun onServiceConnected(name: ComponentName, service: IBinder) {
-                isConnected = true
-                binder = service as LocalService
-                onConnectedListener(service)
-            }
-
-            override fun onBindingDied(name: ComponentName?) {
-                isConnected = false
-                binder = null
-                onBindingDiedListener()
-            }
-
-            override fun onNullBinding(name: ComponentName?) {
-                isConnected = true
-                binder = null
-                onNullBindingListener()
-            }
+        override fun onConnect() {
+            // Start a service to prevent it from being killed by the system.
+            startService()
+            bindService(Context.BIND_AUTO_CREATE)
         }
 
-        fun connect(onConnected: (binder: LocalService) -> Unit) {
-            onConnectedListener = onConnected
-            connect()
-        }
-
-        fun connect() {
-            if (isConnected) {
-                val binder = binder
-                if (binder != null) onConnectedListener(binder)
-            } else {
-                val intent = Intent(context, TicksService::class.java)
-                // Start a service to prevent it from being killed by the system.
-                context.startService(intent)
-                context.bindService(intent, connectionListener, Context.BIND_AUTO_CREATE)
-            }
-        }
-
-        fun disconnect() {
-            if (isConnected) context.unbindService(connectionListener)
-        }
-
-        fun onConnected(listener: (binder: LocalService) -> Unit) {
-            onConnectedListener = listener
-        }
-
-        fun onDisconnected(listener: () -> Unit) {
-            onDisconnectedListener = listener
-        }
-
-        fun onBindingDied(listener: () -> Unit) {
-            onBindingDiedListener = listener
-        }
-
-        fun onNullBinding(listener: () -> Unit) {
-            onNullBindingListener = listener
+        override fun onDisconnect() {
+            unbindService()
         }
     }
 
     inner class LocalService: Binder() {
-
-        fun registerCallback(callback: Callback) {
-//            callbacks.add(callback)
-        }
-
-        fun unregisterCallback(callback: Callback) {
-//            callbacks.remove(callback)
-        }
-
-        fun startTimer(millisInFuture: Long, interval: Long)
-                = onStartTimer(millisInFuture, interval)
-
-        fun resumeTimer(timerID: Long)
-                = onResumeTimer(timerID)
-
-        fun pauseTimer(timerID: Long)
-                = onPauseTimer(timerID)
-
-        fun stopTimer(timerID: Long)
-                = onStopTimer(timerID)
+        fun registerCallback(callback: Timer.Callback) = callbacks.add(callback)
+        fun unregisterCallback(callback: Timer.Callback) = callbacks.remove(callback)
+        fun startTimer(millisInFuture: Long) = multiTimer.start(millisInFuture)
+        fun resumeTimer(timerID: Long) = multiTimer.resume(timerID)
+        fun pauseTimer(timerID: Long) = multiTimer.pause(timerID)
+        fun cancelTimer(timerID: Long) = multiTimer.cancel(timerID)
+        fun scrapTimer(timerID: Long) = multiTimer.scrap(timerID)
     }
 
-    interface Callback {
-        fun onTick(timerID: Long, remainingMillis: Long)
-        fun onFinish(timerID: Long)
+    private val callbackDispatcher = object: Timer.Callback {
+        override fun onStart(timerID: Long) = callbacks.forEach { it.onStart(timerID) }
+        override fun onPause(timerID: Long) = callbacks.forEach { it.onPause(timerID) }
+        override fun onResume(timerID: Long) = callbacks.forEach { it.onResume(timerID) }
+        override fun onCancelled(timerID: Long) = callbacks.forEach { it.onCancelled(timerID) }
+        override fun onFinish(timerID: Long) = callbacks.forEach { it.onFinish(timerID) }
+        override fun onTick(timerID: Long, left: Long) = callbacks.forEach { it.onTick(timerID, left) }
     }
+
+    private val callbacks = mutableSetOf<Timer.Callback>()
+    private val binder = LocalService()
+    private var boundClientsCount = 0
+    private lateinit var multiTimer: MultiTimer
 
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
-        Log.d("mylog", "onStartCommand()")
+        // Bind the service in 5 seconds, or it will be destroyed.
+        Handler().postDelayed({ tryLazyShutdown() }, 5000)
         return START_STICKY
     }
 
@@ -142,44 +75,34 @@ class TicksService: Service() {
     override fun onUnbind(intent: Intent): Boolean {
         Log.d("mylog", "onUnbind()")
         --boundClientsCount
-        if (boundClientsCount == 0)
-            Handler().postDelayed({ tryShutdown() }, SHUTDOWN_DELAY)
+        tryLazyShutdown()
         return false
     }
 
     override fun onCreate() {
         Log.d("mylog", "onCreate()")
         super.onCreate()
-        val workerThread = HandlerThread(TicksService::class.java.name)
-        workerThread.start()
-        countDownLooper = workerThread.looper
+        multiTimer = MultiTimer(TIMER_TICK_PERIOD)
+        multiTimer.setCallback(callbackDispatcher)
     }
 
     override fun onDestroy() {
         Log.d("mylog", "onDestroy()")
         super.onDestroy()
-        countDownLooper.quit()
+        multiTimer.scrap()
     }
 
-    private fun onStartTimer(millisInFuture: Long, interval: Long): Long {
-        return 0
-    }
-
-    private fun onResumeTimer(timerID: Long) {
-
-    }
-
-    private fun onPauseTimer(timerID: Long) {
-
-    }
-
-    private fun onStopTimer(timerID: Long) {
+    private fun tryLazyShutdown() {
+        if (boundClientsCount == 0 &&
+            multiTimer.hasNoStartedTimers()) {
+            stopSelf()
+        }
     }
 
     private fun tryShutdown() {
-//        if (timers.isEmpty() &&
-//            boundClientsCount == 0) {
-//            stopSelf()
-//        }
+        if (boundClientsCount == 0 &&
+            multiTimer.hasNoWorkingTimers()) {
+            stopSelf()
+        }
     }
 }

@@ -58,7 +58,17 @@ class MultiTimer(tickPeriod: Long) {
         timers.remove(timerID)?.scrap()
     }
 
-    fun hasStartedTiemrs() = timers.has { it.started }
+    fun scrap() {
+        quartz.quit()
+        timers.clear()
+        removeCallback()
+    }
+
+    fun hasStartedTimers() = timers.has { it.started }
 
     fun hasWorkingTimers() = timers.has { it.isWorking }
+
+    fun hasNoStartedTimers() = !hasStartedTimers()
+
+    fun hasNoWorkingTimers() = !hasWorkingTimers()
 }
