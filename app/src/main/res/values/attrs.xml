@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ConcaveView">
+        <attr name="concaveRadius" format="dimension"/>
+        <attr name="concaveBackgroundColor" format="color"/>
+    </declare-styleable>
+</resources>

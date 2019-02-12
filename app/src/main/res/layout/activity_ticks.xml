@@ -1,32 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
+        android:id="@+id/container"
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".TicksActivity">
-
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-    android:textStyle="bold"
-    android:text="-ms"
-    android:textSize="24sp"
-    android:textColor="#000000"
-    android:gravity="center"
-    android:id="@+id/label"/>
-
-    <Button android:layout_width="match_parent" android:layout_height="wrap_content"
-    android:id="@+id/button1"
-    android:gravity="center"
-    android:text="start a new timer"/>
-    <Button android:layout_width="match_parent" android:layout_height="wrap_content"
-    android:id="@+id/button2"
-    android:gravity="center"
-    android:text="pause a timer"
-    android:layout_marginTop="48dp"/>
-    <Button android:layout_width="match_parent" android:layout_height="wrap_content"
-    android:id="@+id/button3"
-    android:gravity="center"
-    android:text="resume a timer"
-    android:layout_marginTop="96dp"/>
 
 </FrameLayout>

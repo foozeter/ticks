@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    <TextView
+            android:id="@+id/hours"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            android:textSize="52sp"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:text="h"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="#f5f5f5"
+            android:textStyle="bold"
+            android:textSize="32sp"/>
+
+    <TextView
+            android:id="@+id/minutes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:text="00"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            android:textSize="52sp"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:text="m"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="#f5f5f5"
+            android:textStyle="bold"
+            android:textSize="32sp"/>
+
+    <TextView
+            android:id="@+id/seconds"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:text="00"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            android:textSize="52sp"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:text="s"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="#f5f5f5"
+            android:textStyle="bold"
+            android:textSize="32sp"/>
+
+</LinearLayout>

@@ -1,11 +1,21 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">#212e35</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:navigationBarColor">#212e35</item>
     </style>
 
+    <style name="NumPadItem" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">64dp</item>
+        <item name="android:layout_columnWeight">1</item>
+        <item name="android:layout_gravity">fill_horizontal</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">#f5f5f5</item>
+        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
+    </style>
 </resources>
