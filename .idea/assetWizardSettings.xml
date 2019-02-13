@@ -19,9 +19,10 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="C:\Users\hayashibambi\Pictures\google material icons\drawable-xxxhdpi\baseline_timer_black_24.png" />
-                                      <entry key="outputName" value="ic_timer" />
-                                      <entry key="theme" value="HOLO_DARK" />
+                                      <entry key="imageAsset" value="C:\Users\hayashibambi\Pictures\google material icons\drawable-xxxhdpi\round_add_black_24.png" />
+                                      <entry key="outputName" value="ic_add" />
+                                      <entry key="theme" value="CUSTOM" />
+                                      <entry key="themeColor" value="ffffff" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -40,6 +41,11 @@
                 </map>
               </option>
             </PersistentState>
+          </value>
+        </entry>
+        <entry key="vectorWizard">
+          <value>
+            <PersistentState />
           </value>
         </entry>
       </map>

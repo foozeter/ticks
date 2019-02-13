@@ -8,11 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 
-class CreateTimerFragment : Fragment() {
+class NewTimerFragment : Fragment() {
 
     private lateinit var hoursLabel: TextView
     private lateinit var minutesLabel: TextView
     private lateinit var secondsLabel: TextView
+    private lateinit var titleLabel: TextView
 
     private val defaultInputs = listOf(0, 0, 0, 0, 0, 0) // hh, mm, ss
     private val inputs = defaultInputs.toMutableList()
@@ -22,34 +23,32 @@ class CreateTimerFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_create_timer, container, false)
+        val view = inflater.inflate(R.layout.fragment_new_timer, container, false)
         val timeInput = view.findViewById<View>(R.id.time_input)
         val numPad = view.findViewById<View>(R.id.num_pad)
 
+        titleLabel = view.findViewById(R.id.title)
         hoursLabel = timeInput.findViewById(R.id.hours)
         minutesLabel = timeInput.findViewById(R.id.minutes)
         secondsLabel = timeInput.findViewById(R.id.seconds)
         invalidateLabels()
 
-        numPad.findViewById<View>(R.id.num_button_0).setOnClickListener { onNumberInputted(0) }
-        numPad.findViewById<View>(R.id.num_button_1).setOnClickListener { onNumberInputted(1) }
-        numPad.findViewById<View>(R.id.num_button_2).setOnClickListener { onNumberInputted(2) }
-        numPad.findViewById<View>(R.id.num_button_3).setOnClickListener { onNumberInputted(3) }
-        numPad.findViewById<View>(R.id.num_button_4).setOnClickListener { onNumberInputted(4) }
-        numPad.findViewById<View>(R.id.num_button_5).setOnClickListener { onNumberInputted(5) }
-        numPad.findViewById<View>(R.id.num_button_6).setOnClickListener { onNumberInputted(6) }
-        numPad.findViewById<View>(R.id.num_button_7).setOnClickListener { onNumberInputted(7) }
-        numPad.findViewById<View>(R.id.num_button_8).setOnClickListener { onNumberInputted(8) }
-        numPad.findViewById<View>(R.id.num_button_9).setOnClickListener { onNumberInputted(9) }
-
-        numPad.findViewById<View>(R.id.backspace).apply {
+        view.findViewById<View>(R.id.button_options).setOnClickListener { onShowOptions() }
+        numPad.findViewById<View>(R.id.button_num_0).setOnClickListener { onNumberInputted(0) }
+        numPad.findViewById<View>(R.id.button_num_1).setOnClickListener { onNumberInputted(1) }
+        numPad.findViewById<View>(R.id.button_num_2).setOnClickListener { onNumberInputted(2) }
+        numPad.findViewById<View>(R.id.button_num_3).setOnClickListener { onNumberInputted(3) }
+        numPad.findViewById<View>(R.id.button_num_4).setOnClickListener { onNumberInputted(4) }
+        numPad.findViewById<View>(R.id.button_num_5).setOnClickListener { onNumberInputted(5) }
+        numPad.findViewById<View>(R.id.button_num_6).setOnClickListener { onNumberInputted(6) }
+        numPad.findViewById<View>(R.id.button_num_7).setOnClickListener { onNumberInputted(7) }
+        numPad.findViewById<View>(R.id.button_num_8).setOnClickListener { onNumberInputted(8) }
+        numPad.findViewById<View>(R.id.button_num_9).setOnClickListener { onNumberInputted(9) }
+        numPad.findViewById<View>(R.id.button_check).setOnClickListener { onStartNewTimer() }
+        numPad.findViewById<View>(R.id.button_backspace).apply {
             setOnClickListener { onBackspace() }
             setOnLongClickListener { onBackspaceLong(); true }
         }
-
-//        numPad.findViewById<View>(R.id.button_ok).setOnClickListener {
-//            Log.d("mylog", "check")
-//        }
 
         return view
     }
@@ -78,6 +77,14 @@ class CreateTimerFragment : Fragment() {
         inputs.addAll(defaultInputs)
         inputsCount = 0
         invalidateLabels()
+    }
+
+    private fun onStartNewTimer() {
+
+    }
+
+    private fun onShowOptions() {
+
     }
 
     private fun invalidateLabels() {

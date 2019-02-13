@@ -5,21 +5,42 @@
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         app:cardCornerRadius="24dp"
-        app:cardBackgroundColor="#FEDBD0">
+        app:cardBackgroundColor="#2462ff">
 
-    <TextView
-            android:layout_gravity="center"
-            android:text="start timer"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            android:textColor="#442C2E"
+    <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawablePadding="12dp"
-            android:drawableStart="@drawable/ic_timer"
-            android:drawableTint="#442C2E"
-            android:textAllCaps="true"
-    android:layout_marginEnd="32dp"
-    android:layout_marginStart="32dp"/>
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp">
+
+        <TextView
+                android:text="new"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="#ffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAllCaps="true"/>
+
+        <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+        android:src="@drawable/ic_timer"
+        android:layout_marginStart="12dp"
+                android:tint="#ffffff"
+        android:layout_marginEnd="12dp"/>
+
+        <TextView
+                android:text="timer"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="#ffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAllCaps="true"/>
+
+    </LinearLayout>
 
 </android.support.v7.widget.CardView>
