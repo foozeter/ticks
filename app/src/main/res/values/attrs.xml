@@ -4,4 +4,14 @@
         <attr name="bumpyCornerRadius" format="dimension"/>
         <attr name="bumpyBackgroundColor" format="color"/>
     </declare-styleable>
+
+    <declare-styleable name="TwinTabNavigation">
+        <attr name="nav2T_rightTabIsSelected" format="boolean"/>
+        <attr name="nav2T_leftTabIcon" format="reference"/>
+        <attr name="nav2T_rightTabIcon" format="reference"/>
+        <attr name="nav2T_leftTabTitle" format="string"/>
+        <attr name="nav2T_rightTabTitle" format="string"/>
+        <attr name="nav2T_selectedTabColor" format="color"/>
+        <attr name="nav2T_unselectedTabColor" format="color"/>
+    </declare-styleable>
 </resources>

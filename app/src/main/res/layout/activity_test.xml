@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.foureyedstraighthair.ticks.AnimationAppBar
-        android:id="@+id/app_bar"
+<FrameLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".TestActivity"
-        android:background="#ffffff"
->
+        android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context=".TestActivity">
 
-    <SeekBar
-            android:id="@+id/seek_bar"
-            android:padding="16dp"
-            android:max="100"
+    <com.foureyedstraighthair.ticks.TwinTabNavigation
             android:layout_width="match_parent"
-            android:layout_gravity="bottom"
-             android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            app:nav2T_rightTabIsSelected="true"
+            app:nav2T_leftTabIcon="@drawable/ic_timer"
+            app:nav2T_rightTabIcon="@drawable/ic_menu"
+            app:nav2T_leftTabTitle="Timer"
+            app:nav2T_rightTabTitle="Menu"
+            app:nav2T_selectedTabColor="@color/colorAccent"
+            app:nav2T_unselectedTabColor="#cdcdcd"/>
 
-</com.foureyedstraighthair.ticks.AnimationAppBar>
+</FrameLayout>

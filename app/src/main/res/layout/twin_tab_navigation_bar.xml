@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+       xmlns:tools="http://schemas.android.com/tools"
+       tools:parentTag="android.widget.LinearLayout"
+       android:orientation="horizontal"
+       android:gravity="center">
+
+    <Space
+            android:id="@+id/spacer"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+
+    <LinearLayout
+            android:id="@+id/leftTab"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true"
+            android:minWidth="80dp"
+            android:background="?attr/selectableItemBackgroundBorderless">
+
+        <com.foureyedstraighthair.ticks.TintImageView
+                android:id="@+id/leftTabIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"/>
+
+        <TextView
+                android:id="@+id/leftTabTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:textSize="12sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/rightTab"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true"
+            android:minWidth="80dp"
+            android:background="?attr/selectableItemBackgroundBorderless">
+
+        <com.foureyedstraighthair.ticks.TintImageView
+                android:id="@+id/rightTabIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"/>
+
+        <TextView
+                android:id="@+id/rightTabTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:textSize="12sp"/>
+
+    </LinearLayout>
+
+</merge>
