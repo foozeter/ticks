@@ -8,6 +8,8 @@
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="6dp"
+            android:paddingBottom="128dp"
             android:orientation="vertical">
 
         <include
@@ -19,16 +21,16 @@
                 android:id="@+id/itemShare"/>
 
         <include
-                layout="@layout/main_menu_item_rate_and_review"
+                layout="@layout/main_menu_item_write_review"
                 android:id="@+id/itemRateAndReview"/>
-
-        <include
-                layout="@layout/main_menu_item_feedback"
-                android:id="@+id/itemFeedback"/>
 
         <include
                 layout="@layout/main_menu_item_licenses"
                 android:id="@+id/itemLicenses"/>
+
+        <include
+                layout="@layout/main_menu_item_feedback"
+                android:id="@+id/itemFeedback"/>
 
     </LinearLayout>
 

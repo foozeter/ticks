@@ -1,7 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        style="@style/MainMenuItem"
-        android:background="#9C27B0">
+        style="@style/MainMenuItem">
+<!--<FrameLayout-->
+        <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+        <!--style="@style/MainMenuItem"-->
+        <!--android:background="#9C27B0">-->
 
     <ImageView
             style="@style/MainMenuItemIllustration"
@@ -9,7 +13,10 @@
 
     <TextView
             style="@style/MainMenuItemTitle"
-            android:text="Personal settings"
-            android:textColor="#ffffff"/>
+            android:text="Personal settings"/>
+    <!--<TextView-->
+            <!--style="@style/MainMenuItemTitle"-->
+            <!--android:text="Personal settings"-->
+            <!--android:textColor="#ffffff"/>-->
 
 </FrameLayout>

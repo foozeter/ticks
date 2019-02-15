@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--<FrameLayout-->
+        <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+        <!--style="@style/MainMenuItem"-->
+        <!--android:background="#00BFA5">-->
 <FrameLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        style="@style/MainMenuItem"
-        android:background="#00BFA5">
+        style="@style/MainMenuItem">
 
     <ImageView
             style="@style/MainMenuItemIllustration"

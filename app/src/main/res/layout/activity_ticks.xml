@@ -6,6 +6,7 @@
         android:id="@+id/root_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#ededed"
         tools:context=".TicksActivity">
 
     <Button
@@ -28,11 +29,10 @@
             android:id="@+id/bottom_sheet"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
             android:minHeight="72dp"
             android:layout_gravity="bottom"
             android:paddingTop="32dp"
-            app:bumpyBackgroundColor="#212e35"
+            app:bumpyBackgroundColor="#ffffff"
             app:bumpyCornerRadius="-16dp"
             app:layout_behavior="@string/bottom_sheet_behavior"
             app:behavior_peekHeight="72dp"/>
