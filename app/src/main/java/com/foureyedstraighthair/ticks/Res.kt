@@ -9,28 +9,54 @@ import android.util.TypedValue
 class Res(private val context: Context) {
 
     companion object {
-        private const val CACHE_ACCENT_COLOR = -1
+
+        private const val COLOR_CACHE_ACCENT = -1
+
+        private const val DIMEN_CACHE_NAVIGATION_BAR_HEIGHT = -1
     }
 
-    private val colorCache = mutableMapOf<Int, Int>()
+    private val colorsCache = mutableMapOf<Int, Int>()
+    private val dimensCache = mutableMapOf<Int, Int>()
+
+    fun navigationBarHeight(): Int {
+        var height = dimensCache[DIMEN_CACHE_NAVIGATION_BAR_HEIGHT]
+        if (height != null) return height
+        val id = context.resources.getIdentifier(
+            "navigation_bar_height", "dimen", "android")
+        if (id > 0) {
+            height = context.resources.getDimensionPixelSize(id)
+            dimensCache[DIMEN_CACHE_NAVIGATION_BAR_HEIGHT] = height
+            return height
+        }
+
+        return 0
+    }
+
+    fun pxOf(id: Int): Int {
+        var px = dimensCache[id]
+        if (px != null) return px
+        px = context.resources.getDimensionPixelSize(id)
+        dimensCache[id] = px
+        return px
+    }
 
     fun accentColor(): Int {
-        var color = colorCache[CACHE_ACCENT_COLOR]
+        var color = colorsCache[COLOR_CACHE_ACCENT]
         if (color != null) return color
         val typedValue = TypedValue()
         val a = context.obtainStyledAttributes(
             typedValue.data, intArrayOf(R.attr.colorAccent))
         color = a.getColor(0, 0)
         a.recycle()
-        colorCache[CACHE_ACCENT_COLOR] = color
+        colorsCache[COLOR_CACHE_ACCENT] = color
         return color
     }
 
     fun colorOf(id: Int): Int {
-        var color = colorCache[id]
+        var color = colorsCache[id]
         if (color != null) return color
         color = ContextCompat.getColor(context, id)
-        colorCache[id] = color
+        colorsCache[id] = color
         return color
     }
 }

@@ -1,36 +1,126 @@
 package com.foureyedstraighthair.ticks
 
+import android.animation.ArgbEvaluator
 import android.os.Bundle
-import android.support.design.widget.BottomSheetBehavior
+import android.support.design.widget.CoordinatorLayout
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
+import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import kotlinx.android.synthetic.main.activity_ticks.*
 
 class TicksActivity : AppCompatActivity() {
 
-    private lateinit var sheetBehavior: BottomSheetBehavior<*>
+    private lateinit var bottomSheetContentsEnterAnimation: Animation
+    private lateinit var bottomSheetContentsExitAnimation: Animation
+
+    private lateinit var bottomSheetBehavior: UserLockBottomSheetBehavior<*>
     private lateinit var connection: TicksService.Connection
-    private var sheetCornerRadius = 0f
     private var binder: TicksService.LocalService? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ticks)
 
+        bottomSheetContentsEnterAnimation = AnimationUtils.loadAnimation(
+            this, R.anim.main_bottom_sheet_contents_enter).apply {
+            setAnimationListener(object: Animation.AnimationListener {
+
+                override fun onAnimationRepeat(animation: Animation?) {}
+
+                override fun onAnimationEnd(animation: Animation?) {
+                    mainMenu.visibility = View.VISIBLE
+                }
+
+                override fun onAnimationStart(animation: Animation?) {}
+            })
+        }
+
+        bottomSheetContentsExitAnimation = AnimationUtils.loadAnimation(
+            this, R.anim.main_bottom_sheet_contents_exit).apply {
+            setAnimationListener(object: Animation.AnimationListener {
+
+                override fun onAnimationRepeat(animation: Animation?) {}
+
+                override fun onAnimationEnd(animation: Animation?) {
+                    mainMenu.visibility = View.INVISIBLE
+                }
+
+                override fun onAnimationStart(animation: Animation?) {}
+            })
+        }
+
+        val res = Res(this)
+
+        // Make the navigation bar translucent
+        window.decorView.systemUiVisibility =
+                View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+
+        // Consider the navigation bar height
+        bottomSheetBehavior = UserLockBottomSheetBehavior.from(bottomSheet)
+        bottomSheetBehavior.peekHeight += res.navigationBarHeight()
+        val params = newTimerButton.layoutParams as CoordinatorLayout.LayoutParams
+        params.bottomMargin += res.navigationBarHeight()
+        mainMenu.findViewById<ViewGroup>(R.id.itemContainer).apply {
+            setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom + res.navigationBarHeight())
+        }
+
+        bottomSheetBehavior.apply {
+
+            val sheetCornerRadius = res.pxOf(R.dimen.home_bottom_sheet_corner_radius).toFloat()
+            val collapsedSheetColor = res.colorOf(R.color.home_bottom_sheet_collapsed_color)
+            val expandedSheetColor = res.colorOf(R.color.home_bottom_sheet_expanded_color)
+            val argbEvaluator = ArgbEvaluator()
+
+            setOnSlideListener { _, offset ->
+                bottomSheet.cornerRadius = sheetCornerRadius * (offset - 1f)
+                if (bottomSheetBehavior.isRecentlyExpanded()) {
+                    bottomSheet.setBackgroundColor(argbEvaluator.evaluate(
+                        offset, collapsedSheetColor, expandedSheetColor) as Int)
+                } else if (bottomSheetBehavior.isRecentlyCollapsed()) {
+                    bottomSheet.setBackgroundColor(argbEvaluator.evaluate(
+                        offset, collapsedSheetColor, expandedSheetColor) as Int)
+                }
+            }
+
+            setOnStateChangedListener { _, _ ->
+                when {
+
+                    isExpanded() -> {
+                        bottomSheet.cornerRadius = 0f
+                        bottomSheet.setBackgroundColor(expandedSheetColor)
+                    }
+
+                    isCollapsed() -> {
+                        bottomSheet.cornerRadius = -sheetCornerRadius
+                        bottomSheet.setBackgroundColor(collapsedSheetColor)
+                    }
+                }
+            }
+        }
+
+        newTimerButton.setOnClickListener {
+            if (bottomSheetBehavior.isExpanded()) {
+                bottomSheetBehavior.collapse()
+                mainMenu.startAnimation(bottomSheetContentsExitAnimation)
+            } else if (bottomSheetBehavior.isCollapsed()) {
+                bottomSheetBehavior.expand()
+                mainMenu.startAnimation(bottomSheetContentsEnterAnimation)
+            }
+        }
+
+        // Drawing svg is heavy process, so I'll draw it from the first.
+        mainMenu.post {
+            mainMenu.visibility = View.INVISIBLE
+        }
+
         connection = TicksService.makeConnection(this) {
             onBindingDied { Log.d("mylog", "onBindingDied()") }
             onDisconnected { Log.d("mylog", "onDisconnected()") }
             onNullBinding { Log.d("mylog", "onNullBinding()") }
         }
-
-        sheetCornerRadius = resources.getDimensionPixelSize(R.dimen.home_bottom_sheet_corner_radius).toFloat()
-        sheetBehavior = BottomSheetBehavior.from(findViewById<View>(R.id.bottom_sheet))
-        sheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-        root_layout.post { sheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED }
-        sheetBehavior.setBottomSheetCallback(bottomSheetCallback)
-
-        supportFragmentManager.beginTransaction().replace(R.id.bottom_sheet, MenuFragment()).commit()
     }
 
 //    override fun onStart() {
@@ -47,22 +137,4 @@ class TicksActivity : AppCompatActivity() {
 //        binder?.unregisterCallback(callback)
 //        connection.disconnect()
 //    }
-
-    private val bottomSheetCallback = object: BottomSheetBehavior.BottomSheetCallback() {
-
-        override fun onSlide(sheet: View, slideOffset: Float) {
-            if (0f <= slideOffset) updateCornerRadius(sheet, slideOffset)
-        }
-
-        override fun onStateChanged(sheet: View, state: Int) {
-            when (state) {
-                BottomSheetBehavior.STATE_EXPANDED -> updateCornerRadius(sheet, 1f)
-                BottomSheetBehavior.STATE_COLLAPSED -> updateCornerRadius(sheet, 0f)
-            }
-        }
-
-        private fun updateCornerRadius(sheet: View, fraction: Float) {
-            (sheet as BumpyView).cornerRadius = sheetCornerRadius * (2 * fraction - 1)
-        }
-    }
 }

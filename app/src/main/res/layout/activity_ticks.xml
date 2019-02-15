@@ -6,10 +6,11 @@
         android:id="@+id/root_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#ededed"
+        android:background="#ff0000"
         tools:context=".TicksActivity">
 
     <Button
+            android:id="@+id/newTimerButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="new timer"
@@ -26,15 +27,20 @@
             android:layout_marginBottom="32dp"/>
 
     <com.foureyedstraighthair.ticks.BumpyView
-            android:id="@+id/bottom_sheet"
+            android:id="@+id/bottomSheet"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:minHeight="72dp"
             android:layout_gravity="bottom"
-            android:paddingTop="32dp"
-            app:bumpyBackgroundColor="#ffffff"
+            android:paddingTop="16dp"
+            app:bumpyBackgroundColor="@color/app_base"
             app:bumpyCornerRadius="-16dp"
-            app:layout_behavior="@string/bottom_sheet_behavior"
-            app:behavior_peekHeight="72dp"/>
+            app:layout_behavior="@string/user_loack_bottom_sheeet_behavior"
+            app:behavior_peekHeight="72dp">
+
+        <include layout="@layout/fragment_main_menu"
+                 android:id="@+id/mainMenu"/>
+
+    </com.foureyedstraighthair.ticks.BumpyView>
 
 </android.support.design.widget.CoordinatorLayout>

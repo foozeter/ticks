@@ -13,7 +13,9 @@
                 android:name=".TicksService"
                 android:exported="false"/>
 
-        <activity android:name=".TicksActivity">
+        <activity
+                android:name=".TicksActivity"
+                android:theme="@style/AppTheme.Home">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>

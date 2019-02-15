@@ -1,10 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
+    <color name="app_base">#36454f</color>
+    <color name="app_base_translucent">#cc36454f</color>
+
+    <color name="palette_beach_1">#96ceb4</color>
+    <color name="palette_beach_2">#ffeead</color>
+    <color name="palette_beach_3">#ff6f69</color>
+    <color name="palette_beach_4">#ffcc5c</color>
+    <color name="palette_beach_5">#88d8b0</color>
+    
+    <color name="palette_moonlight_1">#4a4e4d</color>
+    <color name="palette_moonlight_2">#0e9aa7</color>
+    <color name="palette_moonlight_3">#3da4ab</color>
+    <color name="palette_moonlight_4">#f6cd61</color>
+    <color name="palette_moonlight_5">#fe8a71</color>
+
+    <color name="colorPrimary">@color/app_base</color>
+    <color name="colorPrimaryDark">@color/app_base</color>
     <color name="colorAccent">#D81B60</color>
 
-    <color name="main_menu_background">#ffffff</color>
+    <color name="home_bottom_sheet_collapsed_color">@color/app_base</color>
+    <color name="home_bottom_sheet_expanded_color">#ffffff</color>
+    <color name="home_navigation_bar">@color/app_base_translucent</color>
+
+    <color name="main_menu_background">@color/home_bottom_sheet_expanded_color</color>
     <color name="main_menu_item_border">#dadce0</color>
     <color name="main_menu_item_ripple">@color/main_menu_item_border</color>
+
 </resources>
