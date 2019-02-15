@@ -23,6 +23,7 @@ class NewTimerFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
+
         val view = inflater.inflate(R.layout.fragment_new_timer, container, false)
         val timeInput = view.findViewById<View>(R.id.time_input)
         val numPad = view.findViewById<View>(R.id.num_pad)

@@ -66,17 +66,16 @@ class TwinTabNavigation(
         View.inflate(context, R.layout.twin_tab_navigation_bar, this)
 
         val res = Res(context)
-        val accentColor = res.fetchAccentColor()
         Attrs.perform(context, attrs, R.styleable.TwinTabNavigation) {
 
             leftTabIsSelected = !fetchBoolean(
                 R.styleable.TwinTabNavigation_nav2T_rightTabIsSelected, false)
 
             selectedTabColor = fetchColor(
-                R.styleable.TwinTabNavigation_nav2T_selectedTabColor, accentColor)
+                R.styleable.TwinTabNavigation_nav2T_selectedTabColor, res.accentColor())
 
             unselectedTabColor = fetchColor(
-                R.styleable.TwinTabNavigation_nav2T_unselectedTabColor, accentColor)
+                R.styleable.TwinTabNavigation_nav2T_unselectedTabColor, res.accentColor())
 
             leftTabTitle.text = fetchString(
                 R.styleable.TwinTabNavigation_nav2T_leftTabTitle)

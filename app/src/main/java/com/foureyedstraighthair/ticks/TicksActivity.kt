@@ -30,7 +30,7 @@ class TicksActivity : AppCompatActivity() {
         root_layout.post { sheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED }
         sheetBehavior.setBottomSheetCallback(bottomSheetCallback)
 
-//        supportFragmentManager.beginTransaction().replace(R.id.container, NewTimerFragment()).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.bottom_sheet, MenuFragment()).commit()
     }
 
 //    override fun onStart() {

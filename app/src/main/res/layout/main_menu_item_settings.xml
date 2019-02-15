@@ -1,0 +1,15 @@
+<FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        style="@style/MainMenuItem"
+        android:background="#9C27B0">
+
+    <ImageView
+            style="@style/MainMenuItemIllustration"
+            android:src="@drawable/illustration_settings"/>
+
+    <TextView
+            style="@style/MainMenuItemTitle"
+            android:text="Personal settings"
+            android:textColor="#ffffff"/>
+
+</FrameLayout>

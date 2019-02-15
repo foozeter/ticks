@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:fillViewport="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <include
+                layout="@layout/main_menu_item_settings"
+                android:id="@+id/itemSettings"/>
+
+        <include
+                layout="@layout/main_menu_item_share"
+                android:id="@+id/itemShare"/>
+
+        <include
+                layout="@layout/main_menu_item_rate_and_review"
+                android:id="@+id/itemRateAndReview"/>
+
+        <include
+                layout="@layout/main_menu_item_feedback"
+                android:id="@+id/itemFeedback"/>
+
+        <include
+                layout="@layout/main_menu_item_licenses"
+                android:id="@+id/itemLicenses"/>
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

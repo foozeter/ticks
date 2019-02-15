@@ -19,8 +19,8 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="C:\Users\hayashibambi\Pictures\google material icons\drawable-xxxhdpi\round_add_black_24.png" />
-                                      <entry key="outputName" value="ic_add" />
+                                      <entry key="imageAsset" value="C:\Users\hayashibambi\Pictures\google material icons\rounded\account_balance\drawable-xxxhdpi\round_account_balance_black_24.png" />
+                                      <entry key="outputName" value="ic_licenses" />
                                       <entry key="theme" value="CUSTOM" />
                                       <entry key="themeColor" value="ffffff" />
                                     </map>
@@ -45,7 +45,28 @@
         </entry>
         <entry key="vectorWizard">
           <value>
-            <PersistentState />
+            <PersistentState>
+              <option name="children">
+                <map>
+                  <entry key="vectorAssetStep">
+                    <value>
+                      <PersistentState>
+                        <option name="values">
+                          <map>
+                            <entry key="assetSourceType" value="FILE" />
+                            <entry key="height" value="132" />
+                            <entry key="outputName" value="illustration_licenses" />
+                            <entry key="overrideSize" value="true" />
+                            <entry key="sourceFile" value="C:\Users\hayashibambi\Pictures\app resources\undraw\gift\gift_purple700.svg" />
+                            <entry key="width" value="140" />
+                          </map>
+                        </option>
+                      </PersistentState>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </PersistentState>
           </value>
         </entry>
       </map>
