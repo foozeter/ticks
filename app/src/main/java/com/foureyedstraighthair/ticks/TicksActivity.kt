@@ -3,7 +3,6 @@ package com.foureyedstraighthair.ticks
 import android.graphics.Color
 import android.os.Bundle
 import android.support.design.widget.CoordinatorLayout
-import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
@@ -103,16 +102,18 @@ class TicksActivity : AppCompatActivity() {
                     .targets(appBar.menuIcon, appBar.optionsIcon)
                     .duration(300)
                     .start()
+
             }
         }
 
-        bottomSheetContent = HomeBottomSheetContentFragment()
-        bottomSheetContent.onConsiderNavigationBarHeight(res.navigationBarHeight())
-        bottomSheetContent.onAppBarSet(appBar)
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.bottomSheetContent, bottomSheetContent as Fragment)
-            .commit()
+        bottomSheetContent = HomebuttonSheetContentStub()
+//        bottomSheetContent = HomeBottomSheetContentFragment()
+//        bottomSheetContent.onConsiderNavigationBarHeight(res.navigationBarHeight())
+//        bottomSheetContent.onAppBarSet(appBar)
+//        supportFragmentManager
+//            .beginTransaction()
+//            .replace(R.id.bottomSheetContent, bottomSheetContent as Fragment)
+//            .commit()
 
         connection = TicksService.makeConnection(this) {
             onBindingDied { Log.d("mylog", "onBindingDied()") }
@@ -135,4 +136,20 @@ class TicksActivity : AppCompatActivity() {
 //        binder?.unregisterCallback(callback)
 //        connection.disconnect()
 //    }
+
+    class HomebuttonSheetContentStub: HomeBottomSheetContent {
+        override fun onBottomSheetExpand() {}
+
+        override fun onBottomSheetCollapse() {}
+
+        override fun onBottomSheetSlide(offset: Float) {}
+
+        override fun onBottomSheetExpanded() {}
+
+        override fun onBottomSheetCollapsed() {}
+
+        override fun onConsiderNavigationBarHeight(height: Int) {}
+
+        override fun onAppBarSet(appbar: AppBar) {}
+    }
 }
