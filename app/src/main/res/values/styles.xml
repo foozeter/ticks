@@ -9,6 +9,7 @@
     </style>
 
     <style name="AppTheme.Home">
+        <item name="android:windowTranslucentStatus">true</item>
         <item name="android:navigationBarColor">@color/app_base_translucent</item>
     </style>
 

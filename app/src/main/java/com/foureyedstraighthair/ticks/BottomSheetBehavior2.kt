@@ -7,7 +7,7 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
 
-class UserLockBottomSheetBehavior<V : View>
+class BottomSheetBehavior2<V : View>
     : BottomSheetBehavior<V> {
 
     var latestStableState = STATE_COLLAPSED; private set
@@ -17,11 +17,15 @@ class UserLockBottomSheetBehavior<V : View>
     private var onSlide = {sheet: View, offset: Float -> }
     private var onStateChanged = { sheet: View, state: Int -> }
 
+    private val decorations = mutableListOf<(offset: Float) -> Unit>()
+
     private val innerCallback =
         object: BottomSheetBehavior.BottomSheetCallback() {
 
-            override fun onSlide(p0: View, p1: Float)
-                    = this@UserLockBottomSheetBehavior.onSlide(p0, p1)
+            override fun onSlide(p0: View, p1: Float) {
+                decorations.forEach { it.invoke(p1) }
+                this@BottomSheetBehavior2.onSlide(p0, p1)
+            }
 
             override fun onStateChanged(p0: View, p1: Int) {
 
@@ -31,7 +35,7 @@ class UserLockBottomSheetBehavior<V : View>
                     STATE_HIDDEN -> latestStableState = p1
                 }
 
-                this@UserLockBottomSheetBehavior.onStateChanged(p0, p1)
+                this@BottomSheetBehavior2.onStateChanged(p0, p1)
             }
         }
 
@@ -84,6 +88,14 @@ class UserLockBottomSheetBehavior<V : View>
 
     fun unlock() {
         isLocked = false
+    }
+
+    fun addDecoration(decoration: (offset: Float) -> Unit) {
+        decorations.add(decoration)
+    }
+
+    fun removeDecoration(decoration: (offset: Float) -> Unit) {
+        decorations.remove(decoration)
     }
 
     override fun onInterceptTouchEvent(
@@ -181,6 +193,6 @@ class UserLockBottomSheetBehavior<V : View>
         @Suppress("UNCHECKED_CAST")
         fun <V: View> from(view: V)
                 = (view.layoutParams as CoordinatorLayout.LayoutParams)
-            .behavior as UserLockBottomSheetBehavior<V>
+            .behavior as BottomSheetBehavior2<V>
     }
 }

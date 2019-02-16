@@ -13,6 +13,7 @@ class Res(private val context: Context) {
         private const val COLOR_CACHE_ACCENT = -1
 
         private const val DIMEN_CACHE_NAVIGATION_BAR_HEIGHT = -1
+        private const val DIMEN_CACHE_STATUS_BAR_HEIGHT = -2
     }
 
     private val colorsCache = mutableMapOf<Int, Int>()
@@ -29,6 +30,19 @@ class Res(private val context: Context) {
             return height
         }
 
+        return 0
+    }
+
+    fun statusBarHeight(): Int {
+        var height = dimensCache[DIMEN_CACHE_STATUS_BAR_HEIGHT]
+        if (height !=  null) return height
+        val id = context.resources.getIdentifier(
+            "status_bar_height", "dimen", "android")
+        if (id > 0) {
+            height = context.resources.getDimensionPixelSize(id)
+            dimensCache[DIMEN_CACHE_STATUS_BAR_HEIGHT] = height
+            return height
+        }
         return 0
     }
 

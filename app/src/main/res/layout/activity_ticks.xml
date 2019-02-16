@@ -30,16 +30,23 @@
             android:id="@+id/bottomSheet"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:minHeight="72dp"
             android:layout_gravity="bottom"
             android:paddingTop="16dp"
             app:bumpyBackgroundColor="@color/app_base"
             app:bumpyCornerRadius="-16dp"
-            app:layout_behavior="@string/user_loack_bottom_sheeet_behavior"
+            app:layout_behavior="@string/bottom_sheet_behavior_2"
             app:behavior_peekHeight="72dp">
 
-        <include layout="@layout/fragment_main_menu"
-                 android:id="@+id/mainMenu"/>
+        <com.foureyedstraighthair.ticks.AppBar
+                android:id="@+id/appBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        <FrameLayout
+                android:id="@+id/bottomSheetContent"
+                android:layout_marginTop="56dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
 
     </com.foureyedstraighthair.ticks.BumpyView>
 
