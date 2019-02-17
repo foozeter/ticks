@@ -29,7 +29,7 @@ open class TestTimerCallback(
     override fun onStart(timerID: Long) {
         startTime = SystemClock.elapsedRealtime()
         prevTickTime = startTime
-        Log.d(tag, "onStart(id=$timerID)")
+        Log.d(tag, "onCreateAnimator(id=$timerID)")
     }
 
     override fun onTick(timerID: Long, left: Long) {

@@ -1,8 +1,7 @@
 package com.foureyedstraighthair.ticks
 
+import org.junit.Assert.assertEquals
 import org.junit.Test
-
-import org.junit.Assert.*
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -19,5 +18,10 @@ class ExampleUnitTest {
     fun f() {
         val set = mutableSetOf(0, 1, 2, 3, 4, 5)
         set.forEach { if (it == 3) set.remove(it) }
+    }
+
+    @Test
+    fun breadthFirstSearchTest() {
+
     }
 }

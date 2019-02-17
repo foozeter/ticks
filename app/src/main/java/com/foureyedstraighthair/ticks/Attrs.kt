@@ -20,7 +20,7 @@ class Attrs(
         typedArray = null
     }
 
-    fun fetchResourceID(index: Int, default: Int = 0, onFetch: (id: Int) -> Unit): Int {
+    fun fetchResourceID(index: Int, default: Int = 0, onFetch: (id: Int) -> Unit = {}): Int {
         val id = typedArray!!.getResourceId(index, default)
         onFetch(id)
         return id
@@ -59,6 +59,20 @@ class Attrs(
         if (color != -1) onFetch(color)
     }
 
+    fun fetchInt(index: Int, default: Int, onFetch: (int: Int) -> Unit = {}): Int {
+        val int = typedArray!!.getInt(index, default)
+        onFetch(int)
+        return int
+    }
+
+    fun <E> fetchEnum(index: Int, default: E, klass: Class<E>, onFetch: (enum: E) -> Unit = {}): E
+            where E: Enum<E>, E: IdentifiableEnum {
+        val id = typedArray!!.getInt(index, default.id)
+        val enum = klass.enumConstants.find { (it as IdentifiableEnum).id == id }!!
+        onFetch(enum)
+        return enum
+    }
+
     companion object {
 
         fun perform(
@@ -73,5 +87,9 @@ class Attrs(
             a.recycle()
 
         }
+    }
+
+    interface IdentifiableEnum {
+        val id: Int
     }
 }

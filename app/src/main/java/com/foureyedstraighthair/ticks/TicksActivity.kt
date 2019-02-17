@@ -122,8 +122,8 @@ class TicksActivity : AppCompatActivity() {
         }
     }
 
-//    override fun onStart() {
-//        super.onStart()
+//    override fun onCreateAnimator() {
+//        super.onCreateAnimator()
 //        connection.connect {
 //            Log.d("mylog", "connected!")
 //            binder = it

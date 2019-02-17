@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="TargetConfig">
+        <attr name="jam_target_id"/>
+        <attr name="jam_default_flag" format="integer"/>
+    </declare-styleable>
+
+    <declare-styleable name="InlineAnim">
+        <attr name="jam_target" format="reference"/>
+        <attr name="jam_duration"             format="integer"/>
+        <attr name="jam_startDelay" format="integer"/>
+        <attr name="jam_targetFlagBefore" format="integer"/>
+        <attr name="jam_targetFlagAfter" format="integer"/>
+        <attr name="jam_trigger"              format="reference"/>
+        <attr name="jam_triggerEvent"         format="enum">
+            <enum name="onClick"     value="0"/>
+            <enum name="onLongClick" value="1"/>
+        </attr>
+        <attr name="jam_interpolator"         format="enum">
+            <enum name="linear"               value="0"/>
+            <enum name="linearOutSlowIn"      value="1"/>
+            <enum name="accelerate"           value="2"/>
+            <enum name="decelerate"           value="3"/>
+            <enum name="accelerateDecelerate" value="4"/>
+            <enum name="anticipate"           value="5"/>
+            <enum name="anticipateOvershoot"  value="6"/>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="InlineColorAnim">
+        <attr name="jam_startColor" format="color"/>
+        <attr name="jam_endColor" format="color"/>
+        <attr name="jam_property" format="enum">
+            <enum name="backgroundColor" value="0"/>
+            <enum name="drawableTint" value="1"/>
+            <enum name="textColor" value="2"/>
+        </attr>
+    </declare-styleable>
+
+</resources>

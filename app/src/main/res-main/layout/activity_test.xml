@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context=".TestActivity"
+        android:id="@+id/decorView">
+
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <Button android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/button"
+                android:layout_gravity="center_horizontal|bottom"/>
+
+        <ImageView android:layout_width="48dp"
+                   android:layout_height="48dp"
+                   android:src="@drawable/ic_menu_camera"
+                   android:id="@+id/img"
+                   android:layout_gravity="center"/>
+
+    </FrameLayout>
+
+    <com.foureyedstraighthair.ticks.jam.InlineColorAnim
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:jam_target="@id/img"
+            app:jam_trigger="@id/button"
+            app:jam_startColor="#000000"
+            app:jam_endColor="#ff0000"
+            app:jam_duration="500"
+            app:jam_property="drawableTint"
+            app:jam_targetFlagBefore="0"
+            app:jam_targetFlagAfter="1"
+            app:jam_triggerEvent="onClick"/>
+
+    <com.foureyedstraighthair.ticks.jam.InlineColorAnim
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:jam_target="@id/img"
+            app:jam_trigger="@id/button"
+            app:jam_startColor="#ff0000"
+            app:jam_endColor="#000000"
+            app:jam_duration="500"
+            app:jam_property="drawableTint"
+            app:jam_targetFlagBefore="1"
+            app:jam_targetFlagAfter="0"
+            app:jam_triggerEvent="onClick"/>
+
+</FrameLayout>
