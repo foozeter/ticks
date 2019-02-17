@@ -36,7 +36,7 @@
             app:jam_property="drawableTint"
             app:jam_targetFlagBefore="0"
             app:jam_targetFlagAfter="1"
-            app:jam_triggerEvent="onClick"/>
+            app:jam_triggerEvents="onClick|onLongClick"/>
 
     <com.foureyedstraighthair.ticks.jam.InlineColorAnim
             android:layout_width="wrap_content"
@@ -49,6 +49,6 @@
             app:jam_property="drawableTint"
             app:jam_targetFlagBefore="1"
             app:jam_targetFlagAfter="0"
-            app:jam_triggerEvent="onClick"/>
+            app:jam_triggerEvents="onClick"/>
 
 </FrameLayout>

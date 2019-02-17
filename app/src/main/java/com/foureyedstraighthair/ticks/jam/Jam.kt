@@ -3,7 +3,7 @@ package com.foureyedstraighthair.ticks.jam
 import android.view.View
 import android.view.ViewGroup
 import com.foureyedstraighthair.ticks.jam.constant.Default
-import com.foureyedstraighthair.ticks.jam.constant.TriggerEvent
+import com.foureyedstraighthair.ticks.jam.constant.TriggerEvents
 import java.lang.ref.WeakReference
 import java.util.*
 
@@ -100,12 +100,12 @@ class Jam {
         onClickObservers[triggerID]?.additionalListener = {}
     }
 
-    fun setOnTriggerViewLongClickListenerOf(triggerID: Int, listener: (view: View) -> Boolean) {
+    fun setOnTriggerViewLongClickListenerOf(triggerID: Int, listener: (view: View) -> Unit) {
         onLongClickObservers[triggerID]?.additionalListener = listener
     }
 
     fun removeOnTriggerViewLongClickListenerOf(triggerID: Int) {
-        onLongClickObservers[triggerID]?.additionalListener = { false }
+        onLongClickObservers[triggerID]?.additionalListener = {}
     }
 
     fun setAnimationCallbackOf(animationID: Int, callback: InlineAnimationCallback) {
@@ -116,8 +116,8 @@ class Jam {
         animations.find { it.id == animationID }?.callback = null
     }
 
-    private fun onEventOccurred(trigger: View, event: TriggerEvent) {
-        animations.forEach { it.startIfConditionMatch(trigger, event, this) }
+    private fun onEventOccurred(trigger: View, events: TriggerEvents) {
+        animations.forEach { it.startIfConditionMatch(trigger, events, this) }
     }
 
     private fun makeAnimFrom(inlineAnim: InlineAnim)
@@ -156,18 +156,19 @@ class Jam {
         var additionalListener = { _: View -> }
 
         override fun onClick(view: View) {
-            onEventOccurred(view, TriggerEvent.ON_CLICK)
+            onEventOccurred(view, TriggerEvents.onClick)
             additionalListener(view)
         }
     }
 
     private inner class OnLongClickObserver: View.OnLongClickListener {
 
-        var additionalListener = { _: View -> false }
+        var additionalListener = { _: View -> }
 
         override fun onLongClick(view: View): Boolean {
-            onEventOccurred(view, TriggerEvent.ON_LONG_CLICK)
-            return additionalListener(view)
+            onEventOccurred(view, TriggerEvents.onLongClick)
+            additionalListener(view)
+            return true
         }
     }
 }

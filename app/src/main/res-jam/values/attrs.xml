@@ -13,9 +13,9 @@
         <attr name="jam_targetFlagBefore" format="integer"/>
         <attr name="jam_targetFlagAfter" format="integer"/>
         <attr name="jam_trigger"              format="reference"/>
-        <attr name="jam_triggerEvent"         format="enum">
-            <enum name="onClick"     value="0"/>
-            <enum name="onLongClick" value="1"/>
+        <attr name="jam_triggerEvents"         format="flags">
+            <flag name="onClick"     value="1"/>
+            <flag name="onLongClick" value="2"/>
         </attr>
         <attr name="jam_interpolator"         format="enum">
             <enum name="linear"               value="0"/>

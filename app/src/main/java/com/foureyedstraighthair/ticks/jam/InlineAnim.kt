@@ -7,7 +7,7 @@ import com.foureyedstraighthair.ticks.Attrs
 import com.foureyedstraighthair.ticks.R
 import com.foureyedstraighthair.ticks.jam.constant.Default
 import com.foureyedstraighthair.ticks.jam.constant.EInterpolator
-import com.foureyedstraighthair.ticks.jam.constant.TriggerEvent
+import com.foureyedstraighthair.ticks.jam.constant.TriggerEvents
 
 open class InlineAnim(
     context: Context,
@@ -28,7 +28,7 @@ open class InlineAnim(
     
     val targetFlagAfter: Int
 
-    val triggerEvent: TriggerEvent
+    val triggerEvents: TriggerEvents
 
     val interpolator: EInterpolator
 
@@ -52,10 +52,9 @@ open class InlineAnim(
         trigger = attrs.fetchResourceID(
             R.styleable.InlineAnim_jam_trigger)
 
-        triggerEvent = attrs.fetchEnum(
-            R.styleable.InlineAnim_jam_triggerEvent,
-            TriggerEvent.ON_CLICK,
-            TriggerEvent::class.java)
+        triggerEvents = TriggerEvents(attrs.fetchInt(
+            R.styleable.InlineAnim_jam_triggerEvents,
+            Default.TRIGGER_EVENTS))
 
         targetFlagBefore = attrs.fetchInt(
             R.styleable.InlineAnim_jam_targetFlagBefore,
