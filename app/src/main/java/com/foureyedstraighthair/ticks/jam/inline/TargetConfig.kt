@@ -1,7 +1,6 @@
 package com.foureyedstraighthair.ticks.jam.inline
 
 import android.content.Context
-import android.support.annotation.IdRes
 import android.util.AttributeSet
 import com.foureyedstraighthair.ticks.Attrs
 import com.foureyedstraighthair.ticks.R
@@ -9,10 +8,7 @@ import com.foureyedstraighthair.ticks.R
 class TargetConfig(
     context: Context,
     attributeSet: AttributeSet)
-    : UnDrawnView(context, attributeSet) {
-
-    @IdRes
-    val target: Int
+    : InlineCommon(context, attributeSet) {
 
     val defaultFlag: Int
 
@@ -22,11 +18,8 @@ class TargetConfig(
             attributeSet,
             R.styleable.TargetConfig)
 
-        target = attrs.fetchResourceID(
-            R.styleable.TargetConfig_jam_target_id)
-
         defaultFlag = attrs.fetchInt(
-            R.styleable.TargetConfig_jam_default_flag, 0)
+            R.styleable.TargetConfig_jam_defaultFlag, 0)
 
         attrs.recycle()
     }

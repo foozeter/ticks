@@ -1,48 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <declare-styleable name="InlineCommon">
+        <attr name="jam_target" format="reference"/>
+    </declare-styleable>
+
     <declare-styleable name="TargetConfig">
-        <attr name="jam_target_id"/>
-        <attr name="jam_default_flag" format="integer"/>
+        <attr name="jam_defaultFlag" format="integer"/>
     </declare-styleable>
 
     <declare-styleable name="InlineAnim">
-        <attr name="jam_target" format="reference"/>
-        <attr name="jam_duration"             format="integer"/>
+        <attr name="jam_duration" format="integer"/>
         <attr name="jam_startDelay" format="integer"/>
         <attr name="jam_targetFlagBefore" format="integer"/>
         <attr name="jam_targetFlagAfter" format="integer"/>
-        <attr name="jam_trigger"              format="reference"/>
-        <attr name="jam_triggerEvents"         format="flags">
-            <flag name="onClick"     value="1"/>
+        <attr name="jam_trigger" format="reference"/>
+        <attr name="jam_triggerEvents" format="flags">
+            <flag name="onClick" value="1"/>
             <flag name="onLongClick" value="2"/>
         </attr>
-        <attr name="jam_interpolator"         format="enum">
-            <enum name="linear"               value="0"/>
-            <enum name="linearOutSlowIn"      value="1"/>
-            <enum name="accelerate"           value="2"/>
-            <enum name="decelerate"           value="3"/>
+        <attr name="jam_interpolator" format="enum">
+            <enum name="linear" value="0"/>
+            <enum name="linearOutSlowIn" value="1"/>
+            <enum name="accelerate" value="2"/>
+            <enum name="decelerate" value="3"/>
             <enum name="accelerateDecelerate" value="4"/>
-            <enum name="anticipate"           value="5"/>
-            <enum name="anticipateOvershoot"  value="6"/>
+            <enum name="anticipate" value="5"/>
+            <enum name="anticipateOvershoot" value="6"/>
         </attr>
     </declare-styleable>
 
-    <declare-styleable name="InlineColorAnim">
-        <attr name="jam_startColor" format="color"/>
-        <attr name="jam_endColor" format="color"/>
-        <attr name="jam_property" format="enum">
-            <enum name="backgroundColor" value="0"/>
-            <enum name="drawableTint" value="1"/>
-            <enum name="textColor" value="2"/>
-        </attr>
-    </declare-styleable>
-    
     <declare-styleable name="InlineTranslationAnim">
         <attr name="jam_fromXDelta" format="string"/>
         <attr name="jam_toXDelta" format="string"/>
         <attr name="jam_fromYDelta" format="string"/>
         <attr name="jam_toYDelta" format="string"/>
+    </declare-styleable>
+
+    <declare-styleable name="InlinePropertyAnim">
+        <attr name="jam_property" format="string"/>
+    </declare-styleable>
+
+    <declare-styleable name="InlineColorPropertyAnim">
+        <attr name="jam_startColor" format="color"/>
+        <attr name="jam_endColor" format="color"/>
+    </declare-styleable>
+
+    <declare-styleable name="InlineFloatPropertyAnim">
+        <attr name="jam_startFloat" format="float"/>
+        <attr name="jam_endFloat" format="float"/>
     </declare-styleable>
 
 </resources>

@@ -3,12 +3,12 @@ package com.foureyedstraighthair.ticks.jam
 import android.view.View
 import android.view.ViewGroup
 import com.foureyedstraighthair.ticks.jam.anim.Anim
-import com.foureyedstraighthair.ticks.jam.anim.ColorAnim
+import com.foureyedstraighthair.ticks.jam.anim.ColorPropertyAnim
 import com.foureyedstraighthair.ticks.jam.anim.TranslationAnim
 import com.foureyedstraighthair.ticks.jam.constant.Default
 import com.foureyedstraighthair.ticks.jam.constant.TriggerEvents
 import com.foureyedstraighthair.ticks.jam.inline.InlineAnim
-import com.foureyedstraighthair.ticks.jam.inline.InlineColorAnim
+import com.foureyedstraighthair.ticks.jam.inline.InlineColorPropertyAnim
 import com.foureyedstraighthair.ticks.jam.inline.InlineTranslationAnim
 import com.foureyedstraighthair.ticks.jam.inline.TargetConfig
 import java.lang.ref.WeakReference
@@ -129,7 +129,7 @@ class Jam {
 
     private fun makeAnimFrom(inlineAnim: InlineAnim)
             = when (inlineAnim) {
-        is InlineColorAnim -> ColorAnim(this, inlineAnim)
+        is InlineColorPropertyAnim -> ColorPropertyAnim(this, inlineAnim)
         is InlineTranslationAnim -> TranslationAnim(this, inlineAnim)
         else -> throw IllegalArgumentException("$tag : Unknown inline animation object.")
     }

@@ -25,32 +25,30 @@
 
     </FrameLayout>
 
-    <com.foureyedstraighthair.ticks.jam.inline.InlineTranslationAnim
+    <com.foureyedstraighthair.ticks.jam.inline.InlineColorPropertyAnim
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/anim_1"
             app:jam_target="@id/img"
             app:jam_trigger="@id/button"
             app:jam_duration="500"
-            app:jam_fromXDelta="0"
-            app:jam_toXDelta="100dp"
-            app:jam_fromYDelta="0"
-            app:jam_toYDelta="-100dp"
+            app:jam_startColor="#000000"
+            app:jam_endColor="#ff0000"
+            app:jam_property="colorFilter"
             app:jam_targetFlagBefore="0"
             app:jam_targetFlagAfter="1"
             app:jam_triggerEvents="onClick"/>
 
-    <com.foureyedstraighthair.ticks.jam.inline.InlineTranslationAnim
+    <com.foureyedstraighthair.ticks.jam.inline.InlineColorPropertyAnim
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/anim_2"
             app:jam_target="@id/img"
             app:jam_trigger="@id/button"
             app:jam_duration="500"
-            app:jam_fromXDelta="100dp"
-            app:jam_toXDelta="0"
-            app:jam_fromYDelta="-100dp"
-            app:jam_toYDelta="0"
+            app:jam_startColor="#ff0000"
+            app:jam_endColor="#000000"
+            app:jam_property="colorFilter"
             app:jam_targetFlagBefore="1"
             app:jam_targetFlagAfter="0"
             app:jam_triggerEvents="onClick"/>

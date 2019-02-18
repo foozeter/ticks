@@ -12,14 +12,11 @@ import com.foureyedstraighthair.ticks.jam.constant.TriggerEvents
 open class InlineAnim(
     context: Context,
     attributeSet: AttributeSet)
-    : UnDrawnView(context, attributeSet) {
+    : InlineCommon(context, attributeSet) {
 
     val duration: Long
 
     val startDelay: Long
-
-    @IdRes
-    val target: Int
 
     @IdRes
     val trigger: Int
@@ -45,9 +42,6 @@ open class InlineAnim(
         startDelay = attrs.fetchInt(
             R.styleable.InlineAnim_jam_startDelay,
             Default.ANIMATION_START_DELAY).toLong()
-
-        target = attrs.fetchResourceID(
-            R.styleable.InlineAnim_jam_target)
 
         trigger = attrs.fetchResourceID(
             R.styleable.InlineAnim_jam_trigger)
