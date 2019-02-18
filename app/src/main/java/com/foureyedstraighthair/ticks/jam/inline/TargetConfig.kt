@@ -1,4 +1,4 @@
-package com.foureyedstraighthair.ticks.jam
+package com.foureyedstraighthair.ticks.jam.inline
 
 import android.content.Context
 import android.support.annotation.IdRes
@@ -9,7 +9,7 @@ import com.foureyedstraighthair.ticks.R
 class TargetConfig(
     context: Context,
     attributeSet: AttributeSet)
-    : UndrawnView(context, attributeSet) {
+    : UnDrawnView(context, attributeSet) {
 
     @IdRes
     val target: Int

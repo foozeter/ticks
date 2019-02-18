@@ -1,4 +1,4 @@
-package com.foureyedstraighthair.ticks.jam
+package com.foureyedstraighthair.ticks.jam.inline
 
 import android.content.Context
 import android.graphics.Color

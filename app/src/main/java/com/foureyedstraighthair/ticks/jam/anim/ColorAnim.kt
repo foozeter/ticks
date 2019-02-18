@@ -1,8 +1,10 @@
-package com.foureyedstraighthair.ticks.jam
+package com.foureyedstraighthair.ticks.jam.anim
 
 import android.animation.Animator
 import android.animation.ObjectAnimator
 import android.view.View
+import com.foureyedstraighthair.ticks.jam.Jam
+import com.foureyedstraighthair.ticks.jam.inline.InlineColorAnim
 
 class ColorAnim(
     jam: Jam,

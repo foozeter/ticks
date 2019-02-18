@@ -1,5 +1,7 @@
 package com.foureyedstraighthair.ticks.jam
 
+import com.foureyedstraighthair.ticks.jam.anim.Anim
+
 abstract class InlineAnimationCallback {
     open fun onAnimationRepeat(animation: Anim) {}
     open fun onAnimationCancel(animation: Anim) {}

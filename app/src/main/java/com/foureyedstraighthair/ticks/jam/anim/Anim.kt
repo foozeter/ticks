@@ -1,14 +1,18 @@
-package com.foureyedstraighthair.ticks.jam
+package com.foureyedstraighthair.ticks.jam.anim
 
 import android.animation.Animator
 import android.support.annotation.IdRes
 import android.util.Log
 import android.view.View
+import com.foureyedstraighthair.ticks.jam.InlineAnimationCallback
+import com.foureyedstraighthair.ticks.jam.Jam
 import com.foureyedstraighthair.ticks.jam.constant.TriggerEvents
+import com.foureyedstraighthair.ticks.jam.inline.InlineAnim
 
 abstract class Anim (
     val jam: Jam,
-    definition: InlineAnim)
+    definition: InlineAnim
+)
     : Animator.AnimatorPauseListener,
     Animator.AnimatorListener {
 
@@ -61,22 +65,27 @@ abstract class Anim (
     protected abstract fun onCreateAnimator(target: View): Animator
 
     override fun onAnimationRepeat(animation: Animator) {
+        callback?.onAnimationRepeat(this)
     }
 
     override fun onAnimationEnd(animation: Animator) {
         jam.setTargetFlag(targetID, targetFlagAfter)
+        callback?.onAnimationEnd(this)
     }
 
     override fun onAnimationCancel(animation: Animator) {
-
+        callback?.onAnimationCancel(this)
     }
 
     override fun onAnimationStart(animation: Animator) {
+        callback?.onAnimationStart(this)
     }
 
     override fun onAnimationPause(animation: Animator?) {
+        callback?.onAnimationPause(this)
     }
 
     override fun onAnimationResume(animation: Animator?) {
+        callback?.onAnimationResume(this)
     }
 }

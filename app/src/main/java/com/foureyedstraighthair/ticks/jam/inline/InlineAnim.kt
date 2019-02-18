@@ -1,4 +1,4 @@
-package com.foureyedstraighthair.ticks.jam
+package com.foureyedstraighthair.ticks.jam.inline
 
 import android.content.Context
 import android.support.annotation.IdRes
@@ -12,7 +12,7 @@ import com.foureyedstraighthair.ticks.jam.constant.TriggerEvents
 open class InlineAnim(
     context: Context,
     attributeSet: AttributeSet)
-    : UndrawnView(context, attributeSet) {
+    : UnDrawnView(context, attributeSet) {
 
     val duration: Long
 

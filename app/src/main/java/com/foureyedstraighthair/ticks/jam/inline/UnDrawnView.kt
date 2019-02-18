@@ -1,10 +1,10 @@
-package com.foureyedstraighthair.ticks.jam
+package com.foureyedstraighthair.ticks.jam.inline
 
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 
-open class UndrawnView(
+open class UnDrawnView(
     context: Context,
     attributeSet: AttributeSet)
     : View(context, attributeSet) {
