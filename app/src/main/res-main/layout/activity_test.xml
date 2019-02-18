@@ -17,21 +17,29 @@
                 android:id="@+id/button"
                 android:layout_gravity="center_horizontal|bottom"/>
 
+        <View android:layout_width="48dp" android:layout_height="48dp"
+              android:layout_gravity="center"
+              android:background="#0000ff"
+        />
+
         <ImageView android:layout_width="48dp"
                    android:layout_height="48dp"
                    android:src="@drawable/ic_menu_camera"
                    android:id="@+id/img"
                    android:layout_gravity="center"/>
 
+
     </FrameLayout>
 
-    <com.foureyedstraighthair.ticks.jam.inline.InlineColorPropertyAnim
+    <com.foureyedstraighthair.ticks.jam.inline.InlineTranslationAnim
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/anim_1"
             app:jam_target="@id/img"
             app:jam_trigger="@id/button"
             app:jam_duration="500"
+            app:jam_fromXDelta="0"
+            app:jam_toXDelta="25%p"
             app:jam_startColor="#000000"
             app:jam_endColor="#ff0000"
             app:jam_property="colorFilter"
@@ -39,13 +47,15 @@
             app:jam_targetFlagAfter="1"
             app:jam_triggerEvents="onClick"/>
 
-    <com.foureyedstraighthair.ticks.jam.inline.InlineColorPropertyAnim
+    <com.foureyedstraighthair.ticks.jam.inline.InlineTranslationAnim
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/anim_2"
             app:jam_target="@id/img"
             app:jam_trigger="@id/button"
             app:jam_duration="500"
+            app:jam_fromXDelta="25%p"
+            app:jam_toXDelta="0"
             app:jam_startColor="#ff0000"
             app:jam_endColor="#000000"
             app:jam_property="colorFilter"

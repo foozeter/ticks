@@ -9,8 +9,8 @@ import com.foureyedstraighthair.ticks.jam.constant.Default
 import com.foureyedstraighthair.ticks.jam.constant.TriggerEvents
 import com.foureyedstraighthair.ticks.jam.inline.InlineAnim
 import com.foureyedstraighthair.ticks.jam.inline.InlineColorPropertyAnim
+import com.foureyedstraighthair.ticks.jam.inline.InlineConfig
 import com.foureyedstraighthair.ticks.jam.inline.InlineTranslationAnim
-import com.foureyedstraighthair.ticks.jam.inline.TargetConfig
 import java.lang.ref.WeakReference
 import java.util.*
 
@@ -29,7 +29,7 @@ class Jam {
 
     fun setup(layout: View) {
         if (setupFinished) return
-        // Collect InlineAnim and TargetConfig
+        // Collect InlineAnim and InlineConfig
         layout.scan { child, recycleBin ->
 
             when (child) {
@@ -39,7 +39,7 @@ class Jam {
                     recycleBin.add(child)
                 }
 
-                is TargetConfig -> {
+                is InlineConfig -> {
                     targetFlags[child.target] = child.defaultFlag
                     recycleBin.add(child)
                 }

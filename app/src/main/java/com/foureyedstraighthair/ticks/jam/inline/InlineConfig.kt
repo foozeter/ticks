@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import com.foureyedstraighthair.ticks.Attrs
 import com.foureyedstraighthair.ticks.R
 
-class TargetConfig(
+class InlineConfig(
     context: Context,
     attributeSet: AttributeSet)
     : InlineCommon(context, attributeSet) {
@@ -16,10 +16,10 @@ class TargetConfig(
         val attrs = Attrs(
             context,
             attributeSet,
-            R.styleable.TargetConfig)
+            R.styleable.InlineConfig)
 
         defaultFlag = attrs.fetchInt(
-            R.styleable.TargetConfig_jam_defaultFlag, 0)
+            R.styleable.InlineConfig_jam_defaultFlag, 0)
 
         attrs.recycle()
     }

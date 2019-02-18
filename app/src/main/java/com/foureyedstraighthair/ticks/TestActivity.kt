@@ -14,6 +14,13 @@ class TestActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test)
 
+        img.setOnClickListener {
+            Log.d("mylog", "on click")
+        }
+
+        img.translationX += 100
+
+
         val listener = object: InlineAnimationCallback() {
             override fun onAnimationStart(animation: Anim) {
                 Log.d("mylog", "onStart : (left, top) = (${img.left}, ${img.top})")
@@ -33,4 +40,5 @@ class TestActivity : AppCompatActivity() {
             Log.d("mylog", "onClick img")
         }
     }
+
 }

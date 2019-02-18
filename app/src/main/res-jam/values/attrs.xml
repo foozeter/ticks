@@ -5,7 +5,7 @@
         <attr name="jam_target" format="reference"/>
     </declare-styleable>
 
-    <declare-styleable name="TargetConfig">
+    <declare-styleable name="InlineConfig">
         <attr name="jam_defaultFlag" format="integer"/>
     </declare-styleable>
 
