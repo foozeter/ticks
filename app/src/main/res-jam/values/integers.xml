@@ -22,6 +22,9 @@
     <integer name="enum_colorProperty_colorFilter">2</integer>
     <integer name="enum_colorProperty_textColor">3</integer>
 
+    <integer name="enum_translationValueType_percentage">1</integer>
+    <integer name="enum_translationValueType_dimension">2</integer>
+
     <integer name="flag_triggerEvent_onClick">1</integer>
     <integer name="flag_triggerEvent_onLongClick">2</integer>
 

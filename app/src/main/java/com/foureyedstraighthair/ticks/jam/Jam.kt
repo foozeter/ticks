@@ -7,9 +7,11 @@ import com.foureyedstraighthair.ticks.R
 import com.foureyedstraighthair.ticks.jam.anim.Anim
 import com.foureyedstraighthair.ticks.jam.anim.ColorPropertyAnim
 import com.foureyedstraighthair.ticks.jam.anim.FloatPropertyAnim
+import com.foureyedstraighthair.ticks.jam.convenience.TranslateAnim
 import com.foureyedstraighthair.ticks.jam.inline.anim.InlineAnim
 import com.foureyedstraighthair.ticks.jam.inline.anim.InlineColorPropertyAnim
 import com.foureyedstraighthair.ticks.jam.inline.anim.InlineFloatPropertyAnim
+import com.foureyedstraighthair.ticks.jam.inline.convenience.InlineTranslateAnim
 import java.lang.ref.WeakReference
 import java.util.*
 
@@ -131,6 +133,7 @@ class Jam private constructor(layout: View) {
             = when (inlineAnim) {
         is InlineColorPropertyAnim -> ColorPropertyAnim(this, inlineAnim)
         is InlineFloatPropertyAnim -> FloatPropertyAnim(this, inlineAnim)
+        is InlineTranslateAnim -> TranslateAnim(this, inlineAnim)
         else -> throw IllegalArgumentException("$tag : Unknown inline animation object.")
     }
 

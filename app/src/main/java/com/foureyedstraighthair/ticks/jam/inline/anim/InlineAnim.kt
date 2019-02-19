@@ -4,15 +4,16 @@ import android.content.Context
 import android.support.annotation.IdRes
 import android.support.v4.view.animation.LinearOutSlowInInterpolator
 import android.util.AttributeSet
+import android.view.View
+import android.view.ViewGroup
 import android.view.animation.*
 import com.foureyedstraighthair.ticks.R
 import com.foureyedstraighthair.ticks.jam.Default
-import com.foureyedstraighthair.ticks.jam.inline.InlineBase
 
 open class InlineAnim(
     context: Context,
     attributeSet: AttributeSet)
-    : InlineBase(context, attributeSet) {
+    : ViewGroup(context, attributeSet) {
 
     val duration: Long
 
@@ -80,5 +81,15 @@ open class InlineAnim(
         }
 
         attrs.recycle()
+
+        visibility = View.GONE
+        setWillNotDraw(false)
+    }
+
+    final override fun setWillNotDraw(willNotDraw: Boolean)
+            = super.setWillNotDraw(willNotDraw)
+
+    override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
+        // Do nothing.
     }
 }

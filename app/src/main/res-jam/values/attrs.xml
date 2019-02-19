@@ -53,4 +53,38 @@
             <enum name="textColor" value="3"/>
         </attr>
     </declare-styleable>
+
+    <declare-styleable name="InlineTranslateAnim">
+        <attr name="jam_startX" format="fraction"/>
+        <attr name="jam_startY" format="fraction"/>
+        <attr name="jam_endX" format="fraction"/>
+        <attr name="jam_endY" format="fraction"/>
+        <attr name="jam_startWithCurrentX" format="boolean"/>
+        <attr name="jam_startWithCurrentY" format="boolean"/>
+        <attr name="jam_startXDimen" format="dimension"/>
+        <attr name="jam_startYDimen" format="dimension"/>
+        <attr name="jam_endXDimen" format="dimension"/>
+        <attr name="jam_endYDimen" format="dimension"/>
+
+        <attr name="jam_startXType" format="enum">
+            <enum name="percentage" value="1"/>
+            <enum name="dimension" value="2"/>
+        </attr>
+
+        <attr name="jam_startYType" format="enum">
+            <enum name="percentage" value="1"/>
+            <enum name="dimension" value="2"/>
+        </attr>
+
+        <attr name="jam_endXType" format="enum">
+            <enum name="percentage" value="1"/>
+            <enum name="dimension" value="2"/>
+        </attr>
+
+        <attr name="jam_endYType" format="enum">
+            <enum name="percentage" value="1"/>
+            <enum name="dimension" value="2"/>
+        </attr>
+
+    </declare-styleable>
 </resources>

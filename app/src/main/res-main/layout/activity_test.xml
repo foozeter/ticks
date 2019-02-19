@@ -31,100 +31,32 @@
 
     </FrameLayout>
 
-    <com.foureyedstraighthair.ticks.jam.inline.anim.InlineFloatPropertyAnim
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:jam_target="@id/img"
-            android:id="@+id/animA"
-            app:jam_trigger="@id/button"
-            app:jam_allowInterruption="false"
-            app:jam_duration="2000"
-            app:jam_targetStateBefore="0"
-            app:jam_targetStateAfter="1"
-            app:jam_triggerEvents="onClick|onLongClick">
-
-        <com.foureyedstraighthair.ticks.jam.inline.property.InlineFloatProperty
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:jam_floatProperty="translationX"
-                app:jam_startFloat="0"
-                app:jam_endFloat="300"/>
-
-    </com.foureyedstraighthair.ticks.jam.inline.anim.InlineFloatPropertyAnim>
-
-    <com.foureyedstraighthair.ticks.jam.inline.anim.InlineFloatPropertyAnim
+    <com.foureyedstraighthair.ticks.jam.inline.convenience.InlineTranslateAnim
             style="@style/Inline"
+            app:jam_duration="500"
             app:jam_target="@id/img"
             app:jam_trigger="@id/button"
-            app:jam_duration="2000"
-            android:id="@+id/animB"
-            app:jam_startColor="#ff0000"
+            app:jam_startWithCurrentX="true"
+            app:jam_startWithCurrentY="true"
+            app:jam_endX="50%"
+            app:jam_endY="50%"
             app:jam_allowInterruption="false"
-            app:jam_endColor="#000000"
-            app:jam_targetStateBefore="1"
-            app:jam_targetStateAfter="0"
-            app:jam_triggerEvents="onClick">
-
-        <com.foureyedstraighthair.ticks.jam.inline.property.InlineFloatProperty
-                style="@style/Inline"
-                app:jam_floatProperty="translationX"
-                app:jam_startWithCurrentValue="true"
-                app:jam_startFloat="300"
-                app:jam_endFloat="0"/>
-
-    </com.foureyedstraighthair.ticks.jam.inline.anim.InlineFloatPropertyAnim>
-
-    <com.foureyedstraighthair.ticks.jam.inline.anim.InlineColorPropertyAnim
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:jam_allowInterruption="false"
-            app:jam_target="@id/img"
-            android:id="@+id/animC"
-            app:jam_trigger="@id/button"
-            app:jam_duration="2000"
-            app:jam_targetStateBefore="0"
+            app:jam_triggerEvents="onClick"
             app:jam_targetStateAfter="1"
-            app:jam_triggerEvents="onClick">
+            app:jam_targetStateBefore="0"/>
 
-        <com.foureyedstraighthair.ticks.jam.inline.property.InlineColorProperty
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:jam_colorProperty="backgroundColor"
-                app:jam_startColor="#0000ff"
-                app:jam_endColor="#ff000000"/>
-        <com.foureyedstraighthair.ticks.jam.inline.property.InlineColorProperty
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:jam_colorProperty="colorFilter"
-                app:jam_startColor="#000000"
-                app:jam_endColor="#ff0000"/>
-
-    </com.foureyedstraighthair.ticks.jam.inline.anim.InlineColorPropertyAnim>
-
-    <com.foureyedstraighthair.ticks.jam.inline.anim.InlineColorPropertyAnim
+    <com.foureyedstraighthair.ticks.jam.inline.convenience.InlineTranslateAnim
             style="@style/Inline"
+            app:jam_duration="500"
             app:jam_target="@id/img"
             app:jam_trigger="@id/button"
-            android:id="@+id/animD"
-            app:jam_duration="2000"
+            app:jam_endX="0%"
+            app:jam_endY="0%"
+            app:jam_startWithCurrentX="true"
+            app:jam_startWithCurrentY="true"
             app:jam_allowInterruption="false"
-            app:jam_targetStateBefore="1"
+            app:jam_triggerEvents="onClick"
             app:jam_targetStateAfter="0"
-            app:jam_triggerEvents="onClick">
-
-        <com.foureyedstraighthair.ticks.jam.inline.property.InlineColorProperty
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:jam_colorProperty="backgroundColor"
-                app:jam_endColor="#0000ff"
-                app:jam_startColor="#ff000000"/>
-        <com.foureyedstraighthair.ticks.jam.inline.property.InlineColorProperty
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:jam_colorProperty="colorFilter"
-                app:jam_endColor="#000000"
-                app:jam_startColor="#ff0000"/>
-
-    </com.foureyedstraighthair.ticks.jam.inline.anim.InlineColorPropertyAnim>
+            app:jam_targetStateBefore="1"/>
 
 </FrameLayout>
