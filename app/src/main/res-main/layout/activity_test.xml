@@ -31,26 +31,29 @@
 
     </FrameLayout>
 
-    <com.foureyedstraighthair.ticks.jam.inline.InlineTranslationAnim
+    <com.foureyedstraighthair.ticks.jam.inline.InlineFloatPropertyAnim
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/anim_1"
             app:jam_target="@id/img"
             app:jam_trigger="@id/button"
             app:jam_duration="500"
             app:jam_fromXDelta="0"
             app:jam_toXDelta="25%p"
-            app:jam_startColor="#000000"
-            app:jam_endColor="#ff0000"
-            app:jam_property="colorFilter"
             app:jam_targetFlagBefore="0"
             app:jam_targetFlagAfter="1"
-            app:jam_triggerEvents="onClick"/>
+            app:jam_triggerEvents="onClick|onLongClick">
 
-    <com.foureyedstraighthair.ticks.jam.inline.InlineTranslationAnim
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/anim_2"
+        <com.foureyedstraighthair.ticks.jam.inline.InlineFloatProperty
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:jam_startWithCurrentValue="true"
+                app:jam_floatProperty="translationX"
+                app:jam_endFloat="100"/>
+
+    </com.foureyedstraighthair.ticks.jam.inline.InlineFloatPropertyAnim>
+
+    <com.foureyedstraighthair.ticks.jam.inline.InlineFloatPropertyAnim
+            style="@style/Inline"
             app:jam_target="@id/img"
             app:jam_trigger="@id/button"
             app:jam_duration="500"
@@ -58,10 +61,67 @@
             app:jam_toXDelta="0"
             app:jam_startColor="#ff0000"
             app:jam_endColor="#000000"
-            app:jam_property="colorFilter"
             app:jam_targetFlagBefore="1"
             app:jam_targetFlagAfter="0"
-            app:jam_triggerEvents="onClick"/>
+            app:jam_triggerEvents="onClick">
 
+        <com.foureyedstraighthair.ticks.jam.inline.InlineFloatProperty
+                style="@style/Inline"
+                app:jam_floatProperty="translationX"
+                app:jam_startWithCurrentValue="true"
+                app:jam_endFloat="0"/>
+
+    </com.foureyedstraighthair.ticks.jam.inline.InlineFloatPropertyAnim>
+
+    <com.foureyedstraighthair.ticks.jam.inline.InlineColorPropertyAnim
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/anim_1"
+            app:jam_target="@id/img"
+            app:jam_trigger="@id/button"
+            app:jam_duration="500"
+            app:jam_targetFlagBefore="0"
+            app:jam_targetFlagAfter="1"
+            app:jam_triggerEvents="onClick">
+
+        <com.foureyedstraighthair.ticks.jam.inline.InlineColorProperty
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:jam_colorProperty="backgroundColor"
+                app:jam_startColor="#0000ff"
+                app:jam_endColor="#ff000000"/>
+        <com.foureyedstraighthair.ticks.jam.inline.InlineColorProperty
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:jam_colorProperty="colorFilter"
+                app:jam_startColor="#000000"
+                app:jam_endColor="#ff0000"/>
+
+    </com.foureyedstraighthair.ticks.jam.inline.InlineColorPropertyAnim>
+
+    <com.foureyedstraighthair.ticks.jam.inline.InlineColorPropertyAnim
+            style="@style/Inline"
+            android:id="@+id/anim_2"
+            app:jam_target="@id/img"
+            app:jam_trigger="@id/button"
+            app:jam_duration="500"
+            app:jam_targetFlagBefore="1"
+            app:jam_targetFlagAfter="0"
+            app:jam_triggerEvents="onClick">
+
+        <com.foureyedstraighthair.ticks.jam.inline.InlineColorProperty
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:jam_colorProperty="backgroundColor"
+                app:jam_endColor="#0000ff"
+                app:jam_startColor="#ff000000"/>
+        <com.foureyedstraighthair.ticks.jam.inline.InlineColorProperty
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:jam_colorProperty="colorFilter"
+                app:jam_endColor="#000000"
+                app:jam_startColor="#ff0000"/>
+
+    </com.foureyedstraighthair.ticks.jam.inline.InlineColorPropertyAnim>
 
 </FrameLayout>

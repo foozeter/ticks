@@ -1,12 +1,21 @@
 package com.foureyedstraighthair.ticks.jam.anim
 
 import com.foureyedstraighthair.ticks.jam.Jam
+import com.foureyedstraighthair.ticks.jam.inline.InlineProperty
 import com.foureyedstraighthair.ticks.jam.inline.InlinePropertyAnim
+import com.foureyedstraighthair.ticks.jam.property.Property
 
-abstract class PropertyAnim(
+abstract class PropertyAnim<P, Q: Property<P>, R: InlineProperty<P>, S: InlinePropertyAnim<R>>(
     jam: Jam,
-    definition: InlinePropertyAnim)
+    definition: S,
+    propertyClass: Class<Q>,
+    inlinePropertyClass: Class<R>)
     : Anim(jam, definition) {
 
-    val property = definition.property
+    val properties = mutableListOf<Q>().apply {
+        val constructor = propertyClass.getConstructor(inlinePropertyClass)
+        definition.properties.forEach {
+            add(constructor.newInstance(it))
+        }
+    }.toList()
 }

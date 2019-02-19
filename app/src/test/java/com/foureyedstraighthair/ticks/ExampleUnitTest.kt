@@ -73,4 +73,32 @@ class ExampleUnitTest {
         assertEquals(false, fractionP.matches("314%"))
         assertEquals(false, fractionP.matches("3.14%"))
     }
+
+    @Test
+    fun snakeToCamelTest() {
+        assertEquals("thisIsTest", snakeToCamel(TestEnum.THIS_IS_TEST.name))
+        assertEquals("iHave2Dogs", snakeToCamel(TestEnum.I_HAVE_2_DOGS.name))
+        assertEquals("translationX", snakeToCamel(TestEnum.TRANSLATION_X.name))
+    }
+
+    fun snakeToCamel(sname: String): String {
+        val camel = StringBuilder()
+        sname.toLowerCase()
+            .split('_')
+            .forEachIndexed { i, w ->
+                if (i == 0) camel.append(w)
+                else w.forEachIndexed { j, c ->
+                    if (j == 0) camel.append(c.toUpperCase())
+                    else camel.append(c)
+                }
+            }
+
+        return camel.toString()
+    }
+
+    enum class TestEnum {
+        THIS_IS_TEST,
+        I_HAVE_2_DOGS,
+        TRANSLATION_X;
+    }
 }

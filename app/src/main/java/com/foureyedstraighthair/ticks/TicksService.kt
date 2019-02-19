@@ -26,7 +26,7 @@ class TicksService: Service() {
         (context, TicksService::class.java) {
 
         override fun onConnect() {
-            // Start a service to prevent it from being killed by the system.
+            // Start a service to prevent it findBy being killed by the system.
             startService()
             bindService(Context.BIND_AUTO_CREATE)
         }

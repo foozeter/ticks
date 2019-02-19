@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.View
 import com.foureyedstraighthair.ticks.jam.InlineAnimationCallback
 import com.foureyedstraighthair.ticks.jam.Jam
-import com.foureyedstraighthair.ticks.jam.constant.TriggerEvents
 import com.foureyedstraighthair.ticks.jam.inline.InlineAnim
 
 abstract class Anim (
@@ -23,24 +22,24 @@ abstract class Anim (
     @IdRes val triggerID = definition.trigger
     val duration = Math.max(0, definition.duration)
     val startDelay = Math.max(0, definition.startDelay)
-    val interpolator = definition.interpolator.generate()
+    val interpolator = definition.interpolator
     val targetFlagBefore = definition.targetFlagBefore
     val targetFlagAfter = definition.targetFlagAfter
-    val triggerEvents = definition.triggerEvents
+    val triggerEventFlags = definition.triggerEventFlags
 
     var callback: InlineAnimationCallback? = null
 
     private var animator: Animator? = null
 
-    fun startIfConditionMatch(trigger: View, events: TriggerEvents, jam: Jam) {
+    fun startIfConditionMatch(trigger: View, eventFlag: Int, jam: Jam) {
         val target = jam.findTarget(targetID)
         val flag = jam.findTargetFlag(targetID)
-        if ((trigger.id == triggerID)
-            and (triggerEvents.has(events))
-            and (target != null)
-            and (flag != null)
-            and (flag == targetFlagBefore)) {
-            start(target!!)
+        if (trigger.id == triggerID &&
+            triggerEventFlags and eventFlag == eventFlag &&
+            target != null &&
+            flag != null &&
+            flag == targetFlagBefore) {
+            start(target)
         } else if (target == null) {
             Log.w(tag, "unknown target id:$targetID")
         }

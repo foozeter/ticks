@@ -2,15 +2,13 @@ package com.foureyedstraighthair.ticks.jam
 
 import android.view.View
 import android.view.ViewGroup
+import com.foureyedstraighthair.ticks.R
 import com.foureyedstraighthair.ticks.jam.anim.Anim
 import com.foureyedstraighthair.ticks.jam.anim.ColorPropertyAnim
-import com.foureyedstraighthair.ticks.jam.anim.TranslationAnim
-import com.foureyedstraighthair.ticks.jam.constant.Default
-import com.foureyedstraighthair.ticks.jam.constant.TriggerEvents
+import com.foureyedstraighthair.ticks.jam.anim.FloatPropertyAnim
 import com.foureyedstraighthair.ticks.jam.inline.InlineAnim
 import com.foureyedstraighthair.ticks.jam.inline.InlineColorPropertyAnim
-import com.foureyedstraighthair.ticks.jam.inline.InlineConfig
-import com.foureyedstraighthair.ticks.jam.inline.InlineTranslationAnim
+import com.foureyedstraighthair.ticks.jam.inline.InlineFloatPropertyAnim
 import java.lang.ref.WeakReference
 import java.util.*
 
@@ -29,18 +27,11 @@ class Jam {
 
     fun setup(layout: View) {
         if (setupFinished) return
-        // Collect InlineAnim and InlineConfig
+        // Collect children of InlineAnim
         layout.scan { child, recycleBin ->
-
             when (child) {
-
                 is InlineAnim -> {
                     animations.add(makeAnimFrom(child))
-                    recycleBin.add(child)
-                }
-
-                is InlineConfig -> {
-                    targetFlags[child.target] = child.defaultFlag
                     recycleBin.add(child)
                 }
             }
@@ -81,9 +72,9 @@ class Jam {
             return@fullScan targetIDs.isEmpty() && triggerIDs.isEmpty()
         }
 
-        // Set target flags as a default value if not specified in the xml file.
+        // Set target state flags as a default value.
         targets.keys.forEach {
-            if (!targetFlags.contains(it)) targetFlags[it] = Default.TARGET_FLAG
+            targetFlags[it] = Default.TARGET_FLAG
         }
 
         setupFinished = true
@@ -123,14 +114,14 @@ class Jam {
         animations.find { it.id == animationID }?.callback = null
     }
 
-    private fun onEventOccurred(trigger: View, events: TriggerEvents) {
-        animations.forEach { it.startIfConditionMatch(trigger, events, this) }
+    private fun onEventOccurred(trigger: View, eventFlag: Int) {
+        animations.forEach { it.startIfConditionMatch(trigger, eventFlag, this) }
     }
 
     private fun makeAnimFrom(inlineAnim: InlineAnim)
             = when (inlineAnim) {
         is InlineColorPropertyAnim -> ColorPropertyAnim(this, inlineAnim)
-        is InlineTranslationAnim -> TranslationAnim(this, inlineAnim)
+        is InlineFloatPropertyAnim -> FloatPropertyAnim(this, inlineAnim)
         else -> throw IllegalArgumentException("$tag : Unknown inline animation object.")
     }
 
@@ -161,20 +152,24 @@ class Jam {
 
     private inner class OnClickObserver: View.OnClickListener {
 
+        private val onClickFlag = R.integer.flag_triggerEvent_onClick
+
         var additionalListener = { _: View -> }
 
         override fun onClick(view: View) {
-            onEventOccurred(view, TriggerEvents.onClick)
+            onEventOccurred(view, view.resources.getInteger(onClickFlag))
             additionalListener(view)
         }
     }
 
     private inner class OnLongClickObserver: View.OnLongClickListener {
 
+        private val onLongClickFlag = R.integer.flag_triggerEvent_onLongClick
+
         var additionalListener = { _: View -> }
 
         override fun onLongClick(view: View): Boolean {
-            onEventOccurred(view, TriggerEvents.onLongClick)
+            onEventOccurred(view, view.resources.getInteger(onLongClickFlag))
             additionalListener(view)
             return true
         }

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <integer name="enum_interpolator_linear">1</integer>
+    <integer name="enum_interpolator_linearOutSlowIn">2</integer>
+    <integer name="enum_interpolator_accelerate">3</integer>
+    <integer name="enum_interpolator_decelerate">4</integer>
+    <integer name="enum_interpolator_accelerateDecelerate">5</integer>
+    <integer name="enum_interpolator_anticipate">6</integer>
+    <integer name="enum_interpolator_anticipateOvershoot">7</integer>
+
+    <integer name="enum_floatProperty_translationX">1</integer>
+    <integer name="enum_floatProperty_translationY">2</integer>
+    <integer name="enum_floatProperty_rotation">3</integer>
+    <integer name="enum_floatProperty_rotationX">4</integer>
+    <integer name="enum_floatProperty_rotationY">5</integer>
+    <integer name="enum_floatProperty_scaleX">6</integer>
+    <integer name="enum_floatProperty_scaleY">7</integer>
+    <integer name="enum_floatProperty_alpha">8</integer>
+
+    <integer name="enum_colorProperty_backgroundColor">1</integer>
+    <integer name="enum_colorProperty_colorFilter">2</integer>
+    <integer name="enum_colorProperty_textColor">3</integer>
+
+    <integer name="flag_triggerEvent_onClick">1</integer>
+    <integer name="flag_triggerEvent_onLongClick">2</integer>
+
+</resources>

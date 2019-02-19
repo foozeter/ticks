@@ -16,7 +16,7 @@ class TintImageView(
     }
 
     /**
-     * When tint the image, use this to animate changing of its color.
+     * When tint the image, use this to animate changing findBy its color.
      * Then, try: TransitionManager.beginDelayedTransition(..., Recolor())
      */
     var tint = TINT_NOT_SET
