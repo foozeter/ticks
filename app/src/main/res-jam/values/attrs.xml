@@ -39,6 +39,8 @@
             <enum name="scaleX" value="6"/>
             <enum name="scaleY" value="7"/>
             <enum name="alpha" value="8"/>
+            <enum name="x" value="9"/>
+            <enum name="y" value="10"/>
         </attr>
 
     </declare-styleable>
@@ -86,19 +88,12 @@
             <enum name="dimension" value="2"/>
         </attr>
 
-        <attr name="jam_startXType" format="enum">
+        <attr name="jam_xType" format="enum">
             <enum name="absolute" value="1"/>
             <enum name="relative" value="2"/>
         </attr>
-        <attr name="jam_startYType" format="enum">
-            <enum name="absolute" value="1"/>
-            <enum name="relative" value="2"/>
-        </attr>
-        <attr name="jam_endXType" format="enum">
-            <enum name="absolute" value="1"/>
-            <enum name="relative" value="2"/>
-        </attr>
-        <attr name="jam_endYType" format="enum">
+
+        <attr name="jam_yType" format="enum">
             <enum name="absolute" value="1"/>
             <enum name="relative" value="2"/>
         </attr>

@@ -17,6 +17,8 @@
     <integer name="enum_floatProperty_scaleX">6</integer>
     <integer name="enum_floatProperty_scaleY">7</integer>
     <integer name="enum_floatProperty_alpha">8</integer>
+    <integer name="enum_floatProperty_x">9</integer>
+    <integer name="enum_floatProperty_y">10</integer>
 
     <integer name="enum_colorProperty_backgroundColor">1</integer>
     <integer name="enum_colorProperty_colorFilter">2</integer>

@@ -23,8 +23,7 @@ class InlineTranslateAnim(
     val startWithCurrentValue: Vec<Boolean>
     val startValueFormat: Vec<TranslationValueFormat>
     val endValueFormat: Vec<TranslationValueFormat>
-    val startValueType: Vec<TranslationValueType>
-    val endValueType: Vec<TranslationValueType>
+    val valueType: Vec<TranslationValueType>
 
     init {
 
@@ -82,20 +81,12 @@ class InlineTranslateAnim(
             attrs.getInt(R.styleable.InlineTranslateAnim_jam_endYFormat, 0), context)
                 ?: Default.TRANSLATION_VALUE_FROMAT
 
-        val startValueType_x = TranslationValueType.findBy(
-            attrs.getInt(R.styleable.InlineTranslateAnim_jam_startXType, 0), context)
+        val valueType_x = TranslationValueType.findBy(
+            attrs.getInt(R.styleable.InlineTranslateAnim_jam_xType, 0), context)
                 ?: Default.TRANSLATION_VALUE_TYPE
 
-        val startValueType_y = TranslationValueType.findBy(
-            attrs.getInt(R.styleable.InlineTranslateAnim_jam_startYType, 0), context)
-                ?: Default.TRANSLATION_VALUE_TYPE
-
-        val endValueType_x = TranslationValueType.findBy(
-            attrs.getInt(R.styleable.InlineTranslateAnim_jam_endXType, 0), context)
-                ?: Default.TRANSLATION_VALUE_TYPE
-
-        val endValueType_y = TranslationValueType.findBy(
-            attrs.getInt(R.styleable.InlineTranslateAnim_jam_endYType, 0), context)
+        val valueType_y = TranslationValueType.findBy(
+            attrs.getInt(R.styleable.InlineTranslateAnim_jam_yType, 0), context)
                 ?: Default.TRANSLATION_VALUE_TYPE
 
         attrs.recycle()
@@ -109,7 +100,6 @@ class InlineTranslateAnim(
         startWithCurrentValue = Vec(startWithCurrentValue_x, startWithCurrentValue_y)
         startValueFormat = Vec(startValueFormat_x, startValueFormat_y)
         endValueFormat = Vec(endValueFormat_x, endValueFormat_y)
-        startValueType = Vec(startValueType_x, startValueType_y)
-        endValueType = Vec(endValueType_x, endValueType_y)
+        valueType = Vec(valueType_x, valueType_y)
     }
 }

@@ -16,7 +16,9 @@ enum class FloatPropertyName(
     ROTATION_Y(R.integer.enum_floatProperty_rotationY),
     SCALE_X(R.integer.enum_floatProperty_scaleX),
     SCALE_Y(R.integer.enum_floatProperty_scaleY),
-    ALPHA(R.integer.enum_floatProperty_alpha);
+    ALPHA(R.integer.enum_floatProperty_alpha),
+    X(R.integer.enum_floatProperty_x),
+    Y(R.integer.enum_floatProperty_y);
 
     val camelCase = name.toLowerCase().snakeToCamel()
 
@@ -29,6 +31,8 @@ enum class FloatPropertyName(
         SCALE_X -> view.scaleX
         SCALE_Y -> view.scaleY
         ALPHA -> view.alpha
+        X -> view.x
+        Y -> view.y
     }
 
     companion object {
