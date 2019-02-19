@@ -4,6 +4,8 @@ import android.content.Context
 import android.util.AttributeSet
 import com.foureyedstraighthair.ticks.R
 import com.foureyedstraighthair.ticks.jam.Default
+import com.foureyedstraighthair.ticks.jam.Jam
+import com.foureyedstraighthair.ticks.jam.convenience.TranslateAnim
 import com.foureyedstraighthair.ticks.jam.helper.TranslationValueFormat
 import com.foureyedstraighthair.ticks.jam.helper.TranslationValueType
 import com.foureyedstraighthair.ticks.jam.helper.Vec
@@ -102,4 +104,7 @@ class InlineTranslateAnim(
         endValueFormat = Vec(endValueFormat_x, endValueFormat_y)
         valueType = Vec(valueType_x, valueType_y)
     }
+
+    override fun makeAnim(jam: Jam)
+            = TranslateAnim(jam, this)
 }

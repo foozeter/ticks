@@ -9,8 +9,10 @@ import android.view.ViewGroup
 import android.view.animation.*
 import com.foureyedstraighthair.ticks.R
 import com.foureyedstraighthair.ticks.jam.Default
+import com.foureyedstraighthair.ticks.jam.Jam
+import com.foureyedstraighthair.ticks.jam.anim.Anim
 
-open class InlineAnim(
+abstract class InlineAnim(
     context: Context,
     attributeSet: AttributeSet)
     : ViewGroup(context, attributeSet) {
@@ -92,4 +94,6 @@ open class InlineAnim(
     override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
         // Do nothing.
     }
+
+    abstract fun makeAnim(jam: Jam): Anim
 }
