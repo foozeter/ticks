@@ -17,17 +17,17 @@ class TranslateAnim(
     jam: Jam, definition: InlineTranslateAnim)
     : Anim(jam, definition) {
 
-    val startFraction = definition.startFraction
-    val endFraction = definition.endFraction
-    val startDimen = definition.startDimen
-    val endDimen = definition.endDimen
-    val isStartBasedOnParent = definition.isStartBasedOnParent
-    val isEndBasedOnParent = definition.isEndBasedOnParent
-    val startWithCurrentValue = definition.startWithCurrentValue
-    val startValueFormat = definition.startValueFormat
-    val endValueFormat = definition.endValueFormat
+    private val startFraction = definition.startFraction
+    private val endFraction = definition.endFraction
+    private val startDimen = definition.startDimen
+    private val endDimen = definition.endDimen
+    private val isStartBasedOnParent = definition.isStartBasedOnParent
+    private val isEndBasedOnParent = definition.isEndBasedOnParent
+    private val startWithCurrentValue = definition.startWithCurrentValue
+    private val startValueFormat = definition.startValueFormat
+    private val endValueFormat = definition.endValueFormat
 
-    val propertyName = Vec(
+    private val propertyName = Vec(
         when (definition.valueType.x) {
             TranslationValueType.ABSOLUTE -> FloatPropertyName.X
             TranslationValueType.RELATIVE -> FloatPropertyName.TRANSLATION_X
@@ -75,20 +75,20 @@ class TranslateAnim(
         else view.height.toFloat()
 
     private fun resolveStartX(view: View) =
-        if (startWithCurrentValue.x) view.translationX
+        if (startWithCurrentValue.x) propertyName.x.getValueOf(view)
         else resolveX(view, startValueFormat, startFraction,
             startDimen, isStartBasedOnParent)
 
     private fun resolveStartY(view: View) =
-        if (startWithCurrentValue.y) view.translationY
+        if (startWithCurrentValue.y) propertyName.y.getValueOf(view)
         else resolveY(view, startValueFormat, startFraction,
             startDimen, isStartBasedOnParent)
 
-    private fun resolveEndX(view: View) = resolveX(
-        view, endValueFormat, endFraction,
-        endDimen, isEndBasedOnParent)
+    private fun resolveEndX(view: View)
+            = resolveX(view, endValueFormat,
+        endFraction, endDimen, isEndBasedOnParent)
 
-    private fun resolveEndY(view: View) = resolveY(
-        view, endValueFormat, endFraction,
-        endDimen, isEndBasedOnParent)
+    private fun resolveEndY(view: View)
+            = resolveY(view, endValueFormat,
+        endFraction, endDimen, isEndBasedOnParent)
 }

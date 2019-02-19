@@ -1,5 +1,6 @@
 package com.foureyedstraighthair.ticks.jam
 
+import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.ViewGroup
 import com.foureyedstraighthair.ticks.R
@@ -11,6 +12,7 @@ import com.foureyedstraighthair.ticks.jam.inline.anim.InlineAnim
 import com.foureyedstraighthair.ticks.jam.inline.anim.InlineColorPropertyAnim
 import com.foureyedstraighthair.ticks.jam.inline.anim.InlineFloatPropertyAnim
 import com.foureyedstraighthair.ticks.jam.inline.convenience.InlineTranslateAnim
+import kotlinx.android.synthetic.main.activity_test.*
 import java.lang.ref.WeakReference
 import java.util.*
 
@@ -23,7 +25,7 @@ class Jam private constructor(layout: View) {
     private val onClickObservers: Map<Int, OnClickObserver>
     private val onLongClickObservers: Map<Int, OnLongClickObserver>
     private val animations: List<Anim>
-    private val targetFlags = mutableMapOf<Int, Int>()
+    private val targetStates = mutableMapOf<Int, Int>()
 
     init {
 
@@ -78,9 +80,9 @@ class Jam private constructor(layout: View) {
             return@fullScan targetIDs.isEmpty() && triggerIDs.isEmpty()
         }
 
-        // Set target state flags as a default value.
+        // Set states of targets as a default value.
         targets.keys.forEach {
-            targetFlags[it] = Default.TARGET_FLAG
+            targetStates[it] = Default.TARGET_FLAG
         }
 
         this.targets = targets
@@ -94,10 +96,10 @@ class Jam private constructor(layout: View) {
 
     fun findTrigger(id: Int) = triggers[id]?.get()
 
-    fun findTargetFlag(id: Int) = targetFlags[id]
+    fun findTargetState(id: Int) = targetStates[id]
 
-    fun setTargetFlag(id: Int, flag: Int) {
-        targetFlags[id] = flag
+    fun setTargetState(id: Int, state: Int) {
+        targetStates[id] = state
     }
 
     fun setOnTriggerViewOnClickListenerOf(triggerID: Int, listener: (view: View) -> Unit) {
@@ -189,5 +191,10 @@ class Jam private constructor(layout: View) {
     companion object {
 
         fun setup(layout: View) = Jam(layout)
+
+        fun setup(activity: AppCompatActivity, layout: Int): Jam {
+            activity.setContentView(layout)
+            return Jam(activity.decorView)
+        }
     }
 }

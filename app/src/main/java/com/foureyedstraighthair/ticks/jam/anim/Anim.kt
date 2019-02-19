@@ -34,7 +34,7 @@ abstract class Anim (
 
     fun startIfConditionMatch(trigger: View, eventFlag: Int, jam: Jam) {
         val target = jam.findTarget(targetID)
-        val flag = jam.findTargetFlag(targetID)
+        val flag = jam.findTargetState(targetID)
         if (trigger.id == triggerID &&
             triggerEventFlags and eventFlag == eventFlag &&
             target != null &&
@@ -73,7 +73,7 @@ abstract class Anim (
     }
 
     override fun onAnimationEnd(animation: Animator) {
-        jam.setTargetFlag(targetID, targetStateAfter)
+        jam.setTargetState(targetID, targetStateAfter)
         callback?.onAnimationEnd(this)
     }
 
