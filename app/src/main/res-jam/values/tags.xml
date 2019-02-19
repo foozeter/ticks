@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <!-- The key for a view's tag -->
-    <item name="jam_view_tag_target_flag" type="id"/>
-</resources>

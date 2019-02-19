@@ -6,8 +6,8 @@ import android.animation.PropertyValuesHolder
 import android.view.View
 import com.foureyedstraighthair.ticks.jam.Jam
 import com.foureyedstraighthair.ticks.jam.helper.FloatPropertyName
-import com.foureyedstraighthair.ticks.jam.inline.InlineFloatProperty
-import com.foureyedstraighthair.ticks.jam.inline.InlineFloatPropertyAnim
+import com.foureyedstraighthair.ticks.jam.inline.anim.InlineFloatPropertyAnim
+import com.foureyedstraighthair.ticks.jam.inline.property.InlineFloatProperty
 import com.foureyedstraighthair.ticks.jam.property.FloatProperty
 
 class FloatPropertyAnim(jam: Jam, definition: InlineFloatPropertyAnim)

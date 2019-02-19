@@ -1,8 +1,8 @@
 package com.foureyedstraighthair.ticks.jam.anim
 
 import com.foureyedstraighthair.ticks.jam.Jam
-import com.foureyedstraighthair.ticks.jam.inline.InlineProperty
-import com.foureyedstraighthair.ticks.jam.inline.InlinePropertyAnim
+import com.foureyedstraighthair.ticks.jam.inline.anim.InlinePropertyAnim
+import com.foureyedstraighthair.ticks.jam.inline.property.InlineProperty
 import com.foureyedstraighthair.ticks.jam.property.Property
 
 abstract class PropertyAnim<P, Q: Property<P>, R: InlineProperty<P>, S: InlinePropertyAnim<R>>(

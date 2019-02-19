@@ -6,7 +6,7 @@ import android.util.Log
 import android.view.View
 import com.foureyedstraighthair.ticks.jam.InlineAnimationCallback
 import com.foureyedstraighthair.ticks.jam.Jam
-import com.foureyedstraighthair.ticks.jam.inline.InlineAnim
+import com.foureyedstraighthair.ticks.jam.inline.anim.InlineAnim
 
 abstract class Anim (
     val jam: Jam,
@@ -23,9 +23,10 @@ abstract class Anim (
     val duration = Math.max(0, definition.duration)
     val startDelay = Math.max(0, definition.startDelay)
     val interpolator = definition.interpolator
-    val targetFlagBefore = definition.targetFlagBefore
-    val targetFlagAfter = definition.targetFlagAfter
+    val targetStateBefore = definition.targetStateBefore
+    val targetStateAfter = definition.targetStateAfter
     val triggerEventFlags = definition.triggerEventFlags
+    val allowInterruption = definition.allowInterruption
 
     var callback: InlineAnimationCallback? = null
 
@@ -38,22 +39,26 @@ abstract class Anim (
             triggerEventFlags and eventFlag == eventFlag &&
             target != null &&
             flag != null &&
-            flag == targetFlagBefore) {
+            flag == targetStateBefore) {
             start(target)
         } else if (target == null) {
             Log.w(tag, "unknown target id:$targetID")
         }
     }
 
-    fun start(target: View) {
-        cancel()
-        animator = onCreateAnimator(target).apply {
-            duration = this@Anim.duration
-            interpolator = this@Anim.interpolator
-            startDelay = this@Anim.startDelay
-            addListener(this@Anim)
-            addPauseListener(this@Anim)
-            start()
+    private fun start(target: View) {
+        if (allowInterruption ||
+            animator == null ||
+            !animator!!.isStarted) {
+            cancel()
+            animator = onCreateAnimator(target).apply {
+                duration = this@Anim.duration
+                interpolator = this@Anim.interpolator
+                startDelay = this@Anim.startDelay
+                addListener(this@Anim)
+                addPauseListener(this@Anim)
+                start()
+            }
         }
     }
 
@@ -68,7 +73,7 @@ abstract class Anim (
     }
 
     override fun onAnimationEnd(animation: Animator) {
-        jam.setTargetFlag(targetID, targetFlagAfter)
+        jam.setTargetFlag(targetID, targetStateAfter)
         callback?.onAnimationEnd(this)
     }
 

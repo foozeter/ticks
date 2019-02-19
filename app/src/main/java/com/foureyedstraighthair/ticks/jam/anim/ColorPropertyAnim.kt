@@ -6,8 +6,8 @@ import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
 import android.view.View
 import com.foureyedstraighthair.ticks.jam.Jam
-import com.foureyedstraighthair.ticks.jam.inline.InlineColorProperty
-import com.foureyedstraighthair.ticks.jam.inline.InlineColorPropertyAnim
+import com.foureyedstraighthair.ticks.jam.inline.anim.InlineColorPropertyAnim
+import com.foureyedstraighthair.ticks.jam.inline.property.InlineColorProperty
 import com.foureyedstraighthair.ticks.jam.property.ColorProperty
 
 class ColorPropertyAnim(jam: Jam, definition: InlineColorPropertyAnim)

@@ -1,7 +1,8 @@
-package com.foureyedstraighthair.ticks.jam.inline
+package com.foureyedstraighthair.ticks.jam.inline.property
 
 import android.content.Context
 import android.util.AttributeSet
+import com.foureyedstraighthair.ticks.jam.inline.InlineBase
 
 abstract class InlineProperty<T>(
     context: Context, attributeSet: AttributeSet)

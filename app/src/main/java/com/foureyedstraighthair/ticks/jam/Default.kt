@@ -5,4 +5,5 @@ object Default {
     const val TRIGGER_EVENT_FLAGS = 0
     const val ANIMATION_START_DELAY = 0
     const val ANIMATION_DURATION = 300
+    const val ALLOW_INTERRUPTION = true
 }

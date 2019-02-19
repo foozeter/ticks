@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <declare-styleable name="InlineBase">
-
+    <declare-styleable name="InlineAnim">
         <attr name="jam_target" format="reference"/>
         <attr name="jam_trigger" format="reference"/>
         <attr name="jam_duration" format="integer"/>
         <attr name="jam_startDelay" format="integer"/>
-
-        <attr name="jam_startWithCurrentValue" format="boolean"/>
-
-        <attr name="jam_targetFlagBefore" format="integer"/>
-        <attr name="jam_targetFlagAfter" format="integer"/>
+        <attr name="jam_targetStateBefore" format="integer"/>
+        <attr name="jam_targetStateAfter" format="integer"/>
+        <attr name="jam_allowInterruption" format="boolean"/>
 
         <attr name="jam_triggerEvents" format="flags">
             <flag name="onClick" value="1"/>
@@ -27,23 +23,12 @@
             <enum name="anticipate" value="6"/>
             <enum name="anticipateOvershoot" value="7"/>
         </attr>
+    </declare-styleable>
 
-        <attr name="jam_fromXDelta" format="string"/>
-        <attr name="jam_toXDelta" format="string"/>
-        <attr name="jam_fromYDelta" format="string"/>
-        <attr name="jam_toYDelta" format="string"/>
-
-        <attr name="jam_startColor" format="color"/>
-        <attr name="jam_endColor" format="color"/>
-
+    <declare-styleable name="InlineFloatProperty">
+        <attr name="jam_startWithCurrentValue" format="boolean"/>
         <attr name="jam_startFloat" format="float"/>
         <attr name="jam_endFloat" format="float"/>
-
-        <attr name="jam_colorProperty" format="enum">
-            <enum name="backgroundColor" value="1"/>
-            <enum name="colorFilter" value="2"/>
-            <enum name="textColor" value="3"/>
-        </attr>
 
         <attr name="jam_floatProperty" format="enum">
             <enum name="translationX" value="1"/>
@@ -58,4 +43,14 @@
 
     </declare-styleable>
 
+    <declare-styleable name="InlineColorProperty">
+        <attr name="jam_startColor" format="color"/>
+        <attr name="jam_endColor" format="color"/>
+
+        <attr name="jam_colorProperty" format="enum">
+            <enum name="backgroundColor" value="1"/>
+            <enum name="colorFilter" value="2"/>
+            <enum name="textColor" value="3"/>
+        </attr>
+    </declare-styleable>
 </resources>

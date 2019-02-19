@@ -18,8 +18,6 @@ class TestActivity : AppCompatActivity() {
             Log.d("mylog", "on click")
         }
 
-        img.translationX += 100
-
         val listener = object: InlineAnimationCallback() {
             override fun onAnimationStart(animation: Anim) {
                 Log.d("mylog", "onStart : (left, top) = (${img.left}, ${img.top})")
@@ -30,8 +28,7 @@ class TestActivity : AppCompatActivity() {
             }
         }
 
-        val jam = Jam()
-        jam.setup(decorView)
+        Jam.setup(decorView)
 //        jam.setAnimationCallbackOf(R.id.anim_1, listener)
 //        jam.setAnimationCallbackOf(R.id.anim_2, listener)
 

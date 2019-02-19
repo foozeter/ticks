@@ -1,32 +1,37 @@
 package com.foureyedstraighthair.ticks.jam
 
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import com.foureyedstraighthair.ticks.R
 import com.foureyedstraighthair.ticks.jam.anim.Anim
 import com.foureyedstraighthair.ticks.jam.anim.ColorPropertyAnim
 import com.foureyedstraighthair.ticks.jam.anim.FloatPropertyAnim
-import com.foureyedstraighthair.ticks.jam.inline.InlineAnim
-import com.foureyedstraighthair.ticks.jam.inline.InlineColorPropertyAnim
-import com.foureyedstraighthair.ticks.jam.inline.InlineFloatPropertyAnim
+import com.foureyedstraighthair.ticks.jam.inline.anim.InlineAnim
+import com.foureyedstraighthair.ticks.jam.inline.anim.InlineColorPropertyAnim
+import com.foureyedstraighthair.ticks.jam.inline.anim.InlineFloatPropertyAnim
 import java.lang.ref.WeakReference
 import java.util.*
 
-class Jam {
+class Jam private constructor(layout: View) {
 
     private val tag = Jam::class.java.name
 
-    private val targets = mutableMapOf<Int, WeakReference<View>>()
-    private val triggers = mutableMapOf<Int, WeakReference<View>>()
-    private val onClickObservers = mutableMapOf<Int, OnClickObserver>()
-    private val onLongClickObservers = mutableMapOf<Int, OnLongClickObserver>()
+    private val targets: Map<Int, WeakReference<View>>
+    private val triggers: Map<Int, WeakReference<View>>
+    private val onClickObservers: Map<Int, OnClickObserver>
+    private val onLongClickObservers: Map<Int, OnLongClickObserver>
+    private val animations: List<Anim>
     private val targetFlags = mutableMapOf<Int, Int>()
-    private val animations = mutableListOf<Anim>()
 
-    private var setupFinished = false
+    init {
 
-    fun setup(layout: View) {
-        if (setupFinished) return
+        val targets = mutableMapOf<Int, WeakReference<View>>()
+        val triggers = mutableMapOf<Int, WeakReference<View>>()
+        val onClickObservers = mutableMapOf<Int, OnClickObserver>()
+        val onLongClickObservers = mutableMapOf<Int, OnLongClickObserver>()
+        val animations = mutableListOf<Anim>()
+
         // Collect children of InlineAnim
         layout.scan { child, recycleBin ->
             when (child) {
@@ -77,7 +82,11 @@ class Jam {
             targetFlags[it] = Default.TARGET_FLAG
         }
 
-        setupFinished = true
+        this.targets = targets
+        this.triggers = triggers
+        this.onClickObservers = onClickObservers
+        this.onLongClickObservers = onLongClickObservers
+        this.animations = animations
     }
 
     fun findTarget(id: Int) = targets[id]?.get()
@@ -157,6 +166,7 @@ class Jam {
         var additionalListener = { _: View -> }
 
         override fun onClick(view: View) {
+            Log.d("mylog", "onClick")
             onEventOccurred(view, view.resources.getInteger(onClickFlag))
             additionalListener(view)
         }
@@ -169,9 +179,15 @@ class Jam {
         var additionalListener = { _: View -> }
 
         override fun onLongClick(view: View): Boolean {
+            Log.d("mylog", "onLongClick")
             onEventOccurred(view, view.resources.getInteger(onLongClickFlag))
             additionalListener(view)
             return true
         }
+    }
+
+    companion object {
+
+        fun setup(layout: View) = Jam(layout)
     }
 }

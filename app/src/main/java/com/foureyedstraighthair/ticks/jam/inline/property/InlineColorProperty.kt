@@ -1,4 +1,4 @@
-package com.foureyedstraighthair.ticks.jam.inline
+package com.foureyedstraighthair.ticks.jam.inline.property
 
 import android.content.Context
 import android.util.AttributeSet
@@ -15,15 +15,15 @@ class InlineColorProperty(
 
     init {
         val attrs = context.obtainStyledAttributes(
-            attributeSet, R.styleable.InlineBase, 0, 0)
+            attributeSet, R.styleable.InlineColorProperty, 0, 0)
 
         startValue = attrs.getColor(
-            R.styleable.InlineBase_jam_startColor, 0)
+            R.styleable.InlineColorProperty_jam_startColor, 0)
 
         endValue = attrs.getColor(
-            R.styleable.InlineBase_jam_endColor, 0)
+            R.styleable.InlineColorProperty_jam_endColor, 0)
 
-        val enum = attrs.getInt(R.styleable.InlineBase_jam_colorProperty, 0)
+        val enum = attrs.getInt(R.styleable.InlineColorProperty_jam_colorProperty, 0)
         name = ColorPropertyName.findBy(enum, context)?.camelCase
                 ?: throw RuntimeException("Unknown float property.")
 

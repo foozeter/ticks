@@ -1,4 +1,4 @@
-package com.foureyedstraighthair.ticks.jam.inline
+package com.foureyedstraighthair.ticks.jam.inline.anim
 
 import android.content.Context
 import android.support.annotation.IdRes
@@ -7,6 +7,7 @@ import android.util.AttributeSet
 import android.view.animation.*
 import com.foureyedstraighthair.ticks.R
 import com.foureyedstraighthair.ticks.jam.Default
+import com.foureyedstraighthair.ticks.jam.inline.InlineBase
 
 open class InlineAnim(
     context: Context,
@@ -23,45 +24,51 @@ open class InlineAnim(
     @IdRes
     val trigger: Int
 
-    val targetFlagBefore: Int
+    val targetStateBefore: Int
     
-    val targetFlagAfter: Int
+    val targetStateAfter: Int
 
     val triggerEventFlags: Int
+
+    var allowInterruption: Boolean
 
     val interpolator: Interpolator
 
     init {
         val attrs = context.obtainStyledAttributes(
-            attributeSet, R.styleable.InlineBase, 0, 0)
+            attributeSet, R.styleable.InlineAnim, 0, 0)
 
         duration = attrs.getInt(
-            R.styleable.InlineBase_jam_duration,
+            R.styleable.InlineAnim_jam_duration,
             Default.ANIMATION_DURATION).toLong()
 
         startDelay = attrs.getInt(
-            R.styleable.InlineBase_jam_startDelay,
+            R.styleable.InlineAnim_jam_startDelay,
             Default.ANIMATION_START_DELAY).toLong()
         
         target = attrs.getResourceId(
-            R.styleable.InlineBase_jam_target, 0)
+            R.styleable.InlineAnim_jam_target, 0)
 
         trigger = attrs.getResourceId(
-            R.styleable.InlineBase_jam_trigger, 0)
+            R.styleable.InlineAnim_jam_trigger, 0)
 
         triggerEventFlags = attrs.getInt(
-            R.styleable.InlineBase_jam_triggerEvents,
+            R.styleable.InlineAnim_jam_triggerEvents,
             Default.TRIGGER_EVENT_FLAGS)
 
-        targetFlagBefore = attrs.getInt(
-            R.styleable.InlineBase_jam_targetFlagBefore,
+        targetStateBefore = attrs.getInt(
+            R.styleable.InlineAnim_jam_targetStateBefore,
             Default.TARGET_FLAG)
 
-        targetFlagAfter = attrs.getInt(
-            R.styleable.InlineBase_jam_targetFlagAfter,
+        targetStateAfter = attrs.getInt(
+            R.styleable.InlineAnim_jam_targetStateAfter,
             Default.TARGET_FLAG)
 
-        interpolator = when (attrs.getInt(R.styleable.InlineBase_jam_interpolator, 0)) {
+        allowInterruption = attrs.getBoolean(
+            R.styleable.InlineAnim_jam_allowInterruption,
+            Default.ALLOW_INTERRUPTION)
+
+        interpolator = when (attrs.getInt(R.styleable.InlineAnim_jam_interpolator, 0)) {
             context.resources.getInteger(R.integer.enum_interpolator_linear) -> LinearInterpolator()
             context.resources.getInteger(R.integer.enum_interpolator_linearOutSlowIn) -> LinearOutSlowInInterpolator()
             context.resources.getInteger(R.integer.enum_interpolator_accelerate) -> AccelerateInterpolator()
