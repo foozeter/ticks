@@ -1,6 +1,5 @@
 package com.foureyedstraighthair.ticks.jam
 
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import com.foureyedstraighthair.ticks.R
@@ -169,9 +168,8 @@ class Jam private constructor(layout: View) {
         var additionalListener = { _: View -> }
 
         override fun onClick(view: View) {
-            Log.d("mylog", "onClick")
-            onEventOccurred(view, view.resources.getInteger(onClickFlag))
             additionalListener(view)
+            onEventOccurred(view, view.resources.getInteger(onClickFlag))
         }
     }
 
@@ -182,9 +180,8 @@ class Jam private constructor(layout: View) {
         var additionalListener = { _: View -> }
 
         override fun onLongClick(view: View): Boolean {
-            Log.d("mylog", "onLongClick")
-            onEventOccurred(view, view.resources.getInteger(onLongClickFlag))
             additionalListener(view)
+            onEventOccurred(view, view.resources.getInteger(onLongClickFlag))
             return true
         }
     }

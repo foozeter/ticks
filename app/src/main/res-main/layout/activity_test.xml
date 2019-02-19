@@ -8,38 +8,35 @@
         tools:context=".TestActivity"
         android:id="@+id/decorView">
 
-    <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <Button android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/button"
+            android:layout_gravity="center_horizontal|bottom"/>
 
-        <Button android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/button"
-                android:layout_gravity="center_horizontal|bottom"/>
+    <View android:layout_width="48dp" android:layout_height="48dp"
+          android:layout_gravity="center"
+          android:background="#0000ff"
+    />
 
-        <View android:layout_width="48dp" android:layout_height="48dp"
-              android:layout_gravity="center"
-              android:background="#0000ff"
-        />
-
-        <ImageView android:layout_width="48dp"
-                   android:layout_height="48dp"
-                   android:src="@drawable/ic_menu_camera"
-                   android:id="@+id/img"
-                   android:layout_gravity="center"/>
-
-
-    </FrameLayout>
+    <ImageView android:layout_width="48dp"
+               android:layout_height="48dp"
+               android:src="@drawable/ic_menu_camera"
+               android:layout_gravity="center"
+               android:id="@+id/img"/>
 
     <com.foureyedstraighthair.ticks.jam.inline.convenience.InlineTranslateAnim
             style="@style/Inline"
             app:jam_duration="500"
             app:jam_target="@id/img"
             app:jam_trigger="@id/button"
-            app:jam_startWithCurrentX="true"
-            app:jam_startWithCurrentY="true"
-            app:jam_endX="50%"
-            app:jam_endY="50%"
+            app:jam_startXType="absolute"
+            app:jam_startYType="absolute"
+            app:jam_endXType="absolute"
+            app:jam_endYType="absolute"
+            app:jam_startX="0%"
+            app:jam_startY="0%"
+            app:jam_endX="50%p"
+            app:jam_endY="50%p"
             app:jam_allowInterruption="false"
             app:jam_triggerEvents="onClick"
             app:jam_targetStateAfter="1"
@@ -50,13 +47,63 @@
             app:jam_duration="500"
             app:jam_target="@id/img"
             app:jam_trigger="@id/button"
+            app:jam_startXType="absolute"
+            app:jam_startYType="absolute"
+            app:jam_endXType="absolute"
+            app:jam_endYType="absolute"
+            app:jam_startX="50%p"
+            app:jam_startY="50%p"
             app:jam_endX="0%"
             app:jam_endY="0%"
-            app:jam_startWithCurrentX="true"
-            app:jam_startWithCurrentY="true"
             app:jam_allowInterruption="false"
             app:jam_triggerEvents="onClick"
             app:jam_targetStateAfter="0"
             app:jam_targetStateBefore="1"/>
+
+    <!--<com.foureyedstraighthair.ticks.jam.inline.anim.InlineFloatPropertyAnim-->
+            <!--style="@style/Inline"-->
+            <!--app:jam_duration="500"-->
+            <!--app:jam_target="@id/img"-->
+            <!--app:jam_trigger="@id/button"-->
+            <!--app:jam_allowInterruption="false"-->
+            <!--app:jam_triggerEvents="onClick"-->
+            <!--app:jam_targetStateAfter="1"-->
+            <!--app:jam_targetStateBefore="0">-->
+
+        <!--<com.foureyedstraighthair.ticks.jam.inline.property.InlineFloatProperty-->
+                <!--style="@style/Inline"-->
+                <!--app:jam_startFloat="1.0"-->
+                <!--app:jam_endFloat="0.0"-->
+                <!--app:jam_floatProperty="scaleX"/>-->
+        <!--<com.foureyedstraighthair.ticks.jam.inline.property.InlineFloatProperty-->
+                <!--style="@style/Inline"-->
+                <!--app:jam_startFloat="1.0"-->
+                <!--app:jam_endFloat="0.0"-->
+                <!--app:jam_floatProperty="scaleY"/>-->
+
+    <!--</com.foureyedstraighthair.ticks.jam.inline.anim.InlineFloatPropertyAnim>-->
+
+    <!--<com.foureyedstraighthair.ticks.jam.inline.anim.InlineFloatPropertyAnim-->
+            <!--style="@style/Inline"-->
+            <!--app:jam_duration="500"-->
+            <!--app:jam_target="@id/img"-->
+            <!--app:jam_trigger="@id/button"-->
+            <!--app:jam_allowInterruption="false"-->
+            <!--app:jam_triggerEvents="onClick"-->
+            <!--app:jam_targetStateAfter="0"-->
+            <!--app:jam_targetStateBefore="1">-->
+
+        <!--<com.foureyedstraighthair.ticks.jam.inline.property.InlineFloatProperty-->
+                <!--style="@style/Inline"-->
+                <!--app:jam_startFloat="0.0"-->
+                <!--app:jam_endFloat="1.0"-->
+                <!--app:jam_floatProperty="scaleX"/>-->
+        <!--<com.foureyedstraighthair.ticks.jam.inline.property.InlineFloatProperty-->
+                <!--style="@style/Inline"-->
+                <!--app:jam_startFloat="0.0"-->
+                <!--app:jam_endFloat="1.0"-->
+                <!--app:jam_floatProperty="scaleY"/>-->
+
+    <!--</com.foureyedstraighthair.ticks.jam.inline.anim.InlineFloatPropertyAnim>-->
 
 </FrameLayout>

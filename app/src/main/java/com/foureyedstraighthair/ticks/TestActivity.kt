@@ -14,9 +14,8 @@ class TestActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test)
 
-        img.setOnClickListener {
-            Log.d("mylog", "on click")
-        }
+//        img.pivotX = 0.5f
+//        img.pivotY = 0.5f
 
         val listener = object: InlineAnimationCallback() {
             override fun onAnimationStart(animation: Anim) {
@@ -28,12 +27,17 @@ class TestActivity : AppCompatActivity() {
             }
         }
 
-        Jam.setup(decorView)
+        val jam = Jam.setup(decorView)
 //        jam.setAnimationCallbackOf(R.id.anim_1, listener)
 //        jam.setAnimationCallbackOf(R.id.anim_2, listener)
 
+        jam.setOnTriggerViewOnClickListenerOf(R.id.button) {
+            img.pivotX = img.width.toFloat() / 2f
+            img.pivotY = img.height.toFloat() / 2f
+        }
+
         img.setOnClickListener {
-            Log.d("mylog", "onClick img")
+            Log.d("mylog", "getX=${img.x}, getY=${img.y}")
         }
     }
 

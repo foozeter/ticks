@@ -61,29 +61,46 @@
         <attr name="jam_endY" format="fraction"/>
         <attr name="jam_startWithCurrentX" format="boolean"/>
         <attr name="jam_startWithCurrentY" format="boolean"/>
-        <attr name="jam_startXDimen" format="dimension"/>
-        <attr name="jam_startYDimen" format="dimension"/>
-        <attr name="jam_endXDimen" format="dimension"/>
-        <attr name="jam_endYDimen" format="dimension"/>
+        <attr name="jam_startXd" format="dimension"/>
+        <attr name="jam_startYd" format="dimension"/>
+        <attr name="jam_endXd" format="dimension"/>
+        <attr name="jam_endYd" format="dimension"/>
+
+        <attr name="jam_startXFormat" format="enum">
+            <enum name="percentage" value="1"/>
+            <enum name="dimension" value="2"/>
+        </attr>
+
+        <attr name="jam_startYFormat" format="enum">
+            <enum name="percentage" value="1"/>
+            <enum name="dimension" value="2"/>
+        </attr>
+
+        <attr name="jam_endXFormat" format="enum">
+            <enum name="percentage" value="1"/>
+            <enum name="dimension" value="2"/>
+        </attr>
+
+        <attr name="jam_endYFormat" format="enum">
+            <enum name="percentage" value="1"/>
+            <enum name="dimension" value="2"/>
+        </attr>
 
         <attr name="jam_startXType" format="enum">
-            <enum name="percentage" value="1"/>
-            <enum name="dimension" value="2"/>
+            <enum name="absolute" value="1"/>
+            <enum name="relative" value="2"/>
         </attr>
-
         <attr name="jam_startYType" format="enum">
-            <enum name="percentage" value="1"/>
-            <enum name="dimension" value="2"/>
+            <enum name="absolute" value="1"/>
+            <enum name="relative" value="2"/>
         </attr>
-
         <attr name="jam_endXType" format="enum">
-            <enum name="percentage" value="1"/>
-            <enum name="dimension" value="2"/>
+            <enum name="absolute" value="1"/>
+            <enum name="relative" value="2"/>
         </attr>
-
         <attr name="jam_endYType" format="enum">
-            <enum name="percentage" value="1"/>
-            <enum name="dimension" value="2"/>
+            <enum name="absolute" value="1"/>
+            <enum name="relative" value="2"/>
         </attr>
 
     </declare-styleable>

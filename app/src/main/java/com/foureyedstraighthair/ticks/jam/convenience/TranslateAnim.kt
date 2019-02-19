@@ -8,70 +8,99 @@ import android.view.ViewGroup
 import com.foureyedstraighthair.ticks.jam.Jam
 import com.foureyedstraighthair.ticks.jam.anim.Anim
 import com.foureyedstraighthair.ticks.jam.helper.FloatPropertyName
+import com.foureyedstraighthair.ticks.jam.helper.TranslationValueFormat
 import com.foureyedstraighthair.ticks.jam.helper.TranslationValueType
+import com.foureyedstraighthair.ticks.jam.helper.Vec
 import com.foureyedstraighthair.ticks.jam.inline.convenience.InlineTranslateAnim
 
 class TranslateAnim(
     jam: Jam, definition: InlineTranslateAnim)
     : Anim(jam, definition) {
 
-    private val startFraction_x = definition.startFraction_x
-    private val startFraction_y = definition.startFraction_y
-    private val endFraction_x = definition.endFraction_x
-    private val endFraction_y = definition.endFraction_y
-    private val startDimen_x = definition.startDimen_x
-    private val startDimen_y = definition.startDimen_y
-    private val endDimen_x = definition.endDimen_x
-    private val endDimen_y = definition.endDimen_y
-    private val isStartBasedOnparent_x = definition.isStartBasedOnparent_x
-    private val isStartBasedOnparent_y = definition.isStartBasedOnparent_y
-    private val isEndBasedOnparent_x = definition.isEndBasedOnparent_x
-    private val isEndBasedOnparent_y = definition.isEndBasedOnparent_y
-    private val startWithCurrentValue_x = definition.startWithCurrentValue_x
-    private val startWithCurrentValue_y = definition.startWithCurrentValue_y
-    private val startValueType_x = definition.startValueType_x
-    private val startValueType_y = definition.startValueType_y
-    private val endValueType_x = definition.endValueType_x
-    private val endValueType_y = definition.endValueType_y
+    val startFraction = definition.startFraction
+    val endFraction = definition.endFraction
+    val startDimen = definition.startDimen
+    val endDimen = definition.endDimen
+    val isStartBasedOnParent = definition.isStartBasedOnParent
+    val isEndBasedOnParent = definition.isEndBasedOnParent
+    val startWithCurrentValue = definition.startWithCurrentValue
+    val startValueFormat = definition.startValueFormat
+    val endValueFormat = definition.endValueFormat
+    val startValueType = definition.startValueType
+    val endValueType = definition.endValueType
 
+    override fun onCreateAnimator(target: View): Animator
+            = ObjectAnimator.ofPropertyValuesHolder(target,
+            PropertyValuesHolder.ofFloat(FloatPropertyName.TRANSLATION_X.camelCase,
+                if (startWithCurrentValue.x) target.translationX else resolveStartX(target),
+                resolveEndX(target)),
+            PropertyValuesHolder.ofFloat(FloatPropertyName.TRANSLATION_Y.camelCase,
+                if (startWithCurrentValue.y) target.translationY else resolveStartY(target),
+                resolveEndY(target)))
 
-    override fun onCreateAnimator(target: View): Animator {
+    private fun resolveX(
+        view: View,
+        valueType: Vec<TranslationValueType>,
+        valueFormat: Vec<TranslationValueFormat>,
+        fraction: Vec<Float>,
+        dimen: Vec<Float>,
+        isBasedOnParent: Vec<Boolean>) = when (valueType.x) {
 
-        val startX =
-            if (startWithCurrentValue_x) FloatPropertyName.TRANSLATION_X.getValueOf(target)
-            else when (startValueType_x) {
-                TranslationValueType.DIMENSION -> startDimen_x
-                TranslationValueType.PERCENTAGE ->
-                    if (isStartBasedOnparent_x) (target.parent as ViewGroup).width * startFraction_x
-                    else target.width * startFraction_x
-            }
+        TranslationValueType.ABSOLUTE -> when (valueFormat.x) {
+            TranslationValueFormat.DIMENSION -> dimen.x
+            TranslationValueFormat.PERCENTAGE ->
+                if (isBasedOnParent.x) xOf(view) - (view.parent as ViewGroup).width * fraction.x
+                else xOf(view) - view.width * fraction.x
+        }
 
-        val startY =
-            if (startWithCurrentValue_y) FloatPropertyName.TRANSLATION_Y.getValueOf(target)
-            else when (startValueType_y) {
-                TranslationValueType.DIMENSION -> startDimen_y
-                TranslationValueType.PERCENTAGE ->
-                    if (isStartBasedOnparent_y) (target.parent as ViewGroup).height * startFraction_y
-                    else target.height * startFraction_y
-            }
-
-        val endX =
-            when (endValueType_x) {
-                TranslationValueType.DIMENSION -> endDimen_x
-                TranslationValueType.PERCENTAGE ->
-                    if (isEndBasedOnparent_x) (target.parent as ViewGroup).width * endFraction_x
-                    else target.width * endFraction_x
-            }
-
-        val endY =
-            when (endValueType_y) {
-                TranslationValueType.DIMENSION -> endDimen_y
-                TranslationValueType.PERCENTAGE ->
-                    if (isEndBasedOnparent_y) (target.parent as ViewGroup).height * endFraction_y
-                    else target.height * endFraction_y
-            }
-        return ObjectAnimator.ofPropertyValuesHolder(target,
-            PropertyValuesHolder.ofFloat(FloatPropertyName.TRANSLATION_X.camelCase, startX, endX),
-            PropertyValuesHolder.ofFloat(FloatPropertyName.TRANSLATION_Y.camelCase, startY, endY))
+        TranslationValueType.RELATIVE -> when (valueFormat.x) {
+            TranslationValueFormat.DIMENSION -> dimen.x
+            TranslationValueFormat.PERCENTAGE ->
+                if (isBasedOnParent.x) (view.parent as ViewGroup).width * fraction.x
+                else view.width * fraction.x
+        }
     }
+
+    private fun resolveY(
+        view: View,
+        valueType: Vec<TranslationValueType>,
+        valueFormat: Vec<TranslationValueFormat>,
+        fraction: Vec<Float>,
+        dimen: Vec<Float>,
+        isBasedOnParent: Vec<Boolean>) = when (valueType.y) {
+
+        TranslationValueType.ABSOLUTE -> when (valueFormat.y) {
+            TranslationValueFormat.DIMENSION -> yOf(view) - dimen.y
+            TranslationValueFormat.PERCENTAGE ->
+                if (isBasedOnParent.y) yOf(view) - (view.parent as ViewGroup).height * fraction.y
+                else yOf(view) - view.height * fraction.y
+        }
+
+        TranslationValueType.RELATIVE -> when (valueFormat.y) {
+            TranslationValueFormat.DIMENSION -> dimen.y
+            TranslationValueFormat.PERCENTAGE ->
+                if (isBasedOnParent.y) (view.parent as ViewGroup).height * fraction.y
+                else view.height * fraction.y
+        }
+    }
+
+    private fun resolveStartX(view: View) = resolveX(
+        view, startValueType, startValueFormat,
+        startFraction, startDimen, isStartBasedOnParent)
+
+    private fun resolveStartY(view: View) = resolveY(
+        view, startValueType, startValueFormat,
+        startFraction, startDimen, isStartBasedOnParent)
+
+    private fun resolveEndX(view: View) = resolveX(
+        view, endValueType, endValueFormat,
+        endFraction, endDimen, isEndBasedOnParent)
+
+    private fun resolveEndY(view: View) = resolveY(
+        view, endValueType, endValueFormat,
+        endFraction, endDimen, isEndBasedOnParent)
+
+    private fun xOf(view: View) = view.x + view.pivotX
+
+    private fun yOf(view: View) = view.y + view.pivotY
 }
