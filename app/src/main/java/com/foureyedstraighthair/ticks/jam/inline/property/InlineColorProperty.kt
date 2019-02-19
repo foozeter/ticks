@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import com.foureyedstraighthair.ticks.R
 import com.foureyedstraighthair.ticks.jam.helper.ColorPropertyName
+import com.foureyedstraighthair.ticks.jam.property.ColorProperty
 
 class InlineColorProperty(
     context: Context, attributeSet: AttributeSet)
@@ -29,4 +30,6 @@ class InlineColorProperty(
 
         attrs.recycle()
     }
+
+    override fun makeProperty() = ColorProperty(this)
 }

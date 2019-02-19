@@ -3,6 +3,7 @@ package com.foureyedstraighthair.ticks.jam.inline.property
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
+import com.foureyedstraighthair.ticks.jam.property.Property
 
 abstract class InlineProperty<T>(
     context: Context, attributeSet: AttributeSet)
@@ -19,4 +20,6 @@ abstract class InlineProperty<T>(
 
     final override fun setWillNotDraw(willNotDraw: Boolean)
             = super.setWillNotDraw(willNotDraw)
+
+    abstract fun makeProperty(): Property<T>
 }

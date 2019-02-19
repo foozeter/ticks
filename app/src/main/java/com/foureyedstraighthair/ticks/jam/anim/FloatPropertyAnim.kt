@@ -11,8 +11,7 @@ import com.foureyedstraighthair.ticks.jam.inline.property.InlineFloatProperty
 import com.foureyedstraighthair.ticks.jam.property.FloatProperty
 
 class FloatPropertyAnim(jam: Jam, definition: InlineFloatPropertyAnim)
-    : PropertyAnim<Float, FloatProperty, InlineFloatProperty, InlineFloatPropertyAnim>(
-    jam, definition, FloatProperty::class.java, InlineFloatProperty::class.java) {
+    : PropertyAnim<Float, FloatProperty, InlineFloatProperty, InlineFloatPropertyAnim>(jam, definition) {
 
     override fun onCreateAnimator(target: View): Animator =
         ObjectAnimator.ofPropertyValuesHolder(target,

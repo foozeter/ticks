@@ -11,8 +11,7 @@ import com.foureyedstraighthair.ticks.jam.inline.property.InlineColorProperty
 import com.foureyedstraighthair.ticks.jam.property.ColorProperty
 
 class ColorPropertyAnim(jam: Jam, definition: InlineColorPropertyAnim)
-    : PropertyAnim<Int, ColorProperty, InlineColorProperty, InlineColorPropertyAnim>(
-    jam, definition, ColorProperty::class.java, InlineColorProperty::class.java) {
+    : PropertyAnim<Int, ColorProperty, InlineColorProperty, InlineColorPropertyAnim>(jam, definition) {
 
     private val propertyHolders = properties.map {
         PropertyValuesHolder

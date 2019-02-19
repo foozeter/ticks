@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import com.foureyedstraighthair.ticks.R
 import com.foureyedstraighthair.ticks.jam.helper.FloatPropertyName
+import com.foureyedstraighthair.ticks.jam.property.FloatProperty
 
 class InlineFloatProperty(
     context: Context, attributeSet: AttributeSet)
@@ -34,4 +35,6 @@ class InlineFloatProperty(
 
         attrs.recycle()
     }
+
+    override fun makeProperty() = FloatProperty(this)
 }
