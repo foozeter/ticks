@@ -24,82 +24,28 @@
                android:layout_gravity="center"
                android:id="@+id/img"/>
 
-    <com.foureyedstraighthair.ticks.jam.inline.convenience.InlineTranslateAnim
-            style="@style/Inline"
-            app:jam_duration="500"
-            app:jam_target="@id/img"
-            app:jam_trigger="@id/button"
-            app:jam_xType="relative"
-            app:jam_yType="relative"
-            app:jam_startX="0%"
-            app:jam_startY="0%"
-            app:jam_endX="50%p"
-            app:jam_endY="50%p"
-            app:jam_allowInterruption="false"
-            app:jam_triggerEvents="onClick"
-            app:jam_targetStateAfter="1"
-            app:jam_targetStateBefore="0"/>
+    <com.foureyedstraighthair.ticks.inlime.InlineAnimator
+            android:id="@+id/anim_a"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:inlime_target="@id/img"
+            app:inlime_trigger="@id/button"
+            app:inlime_animator="@animator/test_animator_2"
+            app:inlime_allowInterruption="false"
+            app:inlime_triggeredByClick="true"
+            app:inlime_triggeredByLongClick="true"/>
 
-    <com.foureyedstraighthair.ticks.jam.inline.convenience.InlineTranslateAnim
-            style="@style/Inline"
-            app:jam_duration="500"
-            app:jam_target="@id/img"
-            app:jam_trigger="@id/button"
-            app:jam_xType="relative"
-            app:jam_yType="relative"
-            app:jam_startX="50%p"
-            app:jam_startY="50%p"
-            app:jam_endX="0%"
-            app:jam_endY="0%"
-            app:jam_allowInterruption="false"
-            app:jam_triggerEvents="onClick"
-            app:jam_targetStateAfter="0"
-            app:jam_targetStateBefore="1"/>
-
-    <!--<com.foureyedstraighthair.ticks.jam.inline.anim.InlineFloatPropertyAnim-->
-            <!--style="@style/Inline"-->
-            <!--app:jam_duration="500"-->
-            <!--app:jam_target="@id/img"-->
-            <!--app:jam_trigger="@id/button"-->
-            <!--app:jam_allowInterruption="false"-->
-            <!--app:jam_triggerEvents="onClick"-->
-            <!--app:jam_targetStateAfter="1"-->
-            <!--app:jam_targetStateBefore="0">-->
-
-        <!--<com.foureyedstraighthair.ticks.jam.inline.property.InlineFloatProperty-->
-                <!--style="@style/Inline"-->
-                <!--app:jam_startFloat="1.0"-->
-                <!--app:jam_endFloat="0.0"-->
-                <!--app:jam_floatProperty="scaleX"/>-->
-        <!--<com.foureyedstraighthair.ticks.jam.inline.property.InlineFloatProperty-->
-                <!--style="@style/Inline"-->
-                <!--app:jam_startFloat="1.0"-->
-                <!--app:jam_endFloat="0.0"-->
-                <!--app:jam_floatProperty="scaleY"/>-->
-
-    <!--</com.foureyedstraighthair.ticks.jam.inline.anim.InlineFloatPropertyAnim>-->
-
-    <!--<com.foureyedstraighthair.ticks.jam.inline.anim.InlineFloatPropertyAnim-->
-            <!--style="@style/Inline"-->
-            <!--app:jam_duration="500"-->
-            <!--app:jam_target="@id/img"-->
-            <!--app:jam_trigger="@id/button"-->
-            <!--app:jam_allowInterruption="false"-->
-            <!--app:jam_triggerEvents="onClick"-->
-            <!--app:jam_targetStateAfter="0"-->
-            <!--app:jam_targetStateBefore="1">-->
-
-        <!--<com.foureyedstraighthair.ticks.jam.inline.property.InlineFloatProperty-->
-                <!--style="@style/Inline"-->
-                <!--app:jam_startFloat="0.0"-->
-                <!--app:jam_endFloat="1.0"-->
-                <!--app:jam_floatProperty="scaleX"/>-->
-        <!--<com.foureyedstraighthair.ticks.jam.inline.property.InlineFloatProperty-->
-                <!--style="@style/Inline"-->
-                <!--app:jam_startFloat="0.0"-->
-                <!--app:jam_endFloat="1.0"-->
-                <!--app:jam_floatProperty="scaleY"/>-->
-
-    <!--</com.foureyedstraighthair.ticks.jam.inline.anim.InlineFloatPropertyAnim>-->
+    <!--<com.foureyedstraighthair.ticks.inlime.InlineAnimator-->
+            <!--android:id="@+id/anim_b"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--app:inlime_target="@id/img"-->
+            <!--app:inlime_trigger="@id/button"-->
+            <!--app:inlime_animator="@animator/test_animator"-->
+            <!--app:inlime_stateName="state_img"-->
+            <!--app:inlime_necessaryStateCondition="moved"-->
+            <!--app:inlime_nextState="initial"-->
+            <!--app:inlime_repeatAtInterruption="true"-->
+            <!--app:inlime_triggeredByClick="true"/>-->
 
 </FrameLayout>

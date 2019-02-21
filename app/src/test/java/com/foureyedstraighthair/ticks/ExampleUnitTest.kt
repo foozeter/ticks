@@ -101,4 +101,28 @@ class ExampleUnitTest {
         I_HAVE_2_DOGS,
         TRANSLATION_X;
     }
+
+    @Test
+    fun pol() {
+        f(1)
+        f(1f)
+        f("s")
+        f('c')
+    }
+
+    fun f(param: Int) {
+        println("f:Int")
+    }
+
+    fun f(param: Float) {
+        println("f:Float")
+    }
+
+    fun f(param: String) {
+        println("f:String")
+    }
+
+    fun f(param: Any) {
+        println("f:Any")
+    }
 }
