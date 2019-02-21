@@ -1,12 +1,14 @@
-package com.foureyedstraighthair.ticks.inlime
+package com.foureyedstraighthair.ticks.jam.internal
 
 import android.view.View
 import android.view.ViewGroup
+import com.foureyedstraighthair.ticks.jam.InlineAnimator
+import com.foureyedstraighthair.ticks.jam.Jam
 import java.util.*
 
 internal class Builder {
 
-    fun createFrom(layout: View): Inlime {
+    fun createFrom(layout: View): Jam {
 
         val targets = mutableListOf<View>()
         val triggers = mutableListOf<View>()
@@ -45,7 +47,7 @@ internal class Builder {
             return@fullScan targetIDs.isEmpty() && triggerIDs.isEmpty()
         }
 
-        return Inlime(triggers, targets, animators)
+        return Jam(triggers, targets, animators)
     }
 
     private fun View.scan(onChild: (child: View, recycleBin: MutableList<View>) -> Unit) {

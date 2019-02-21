@@ -1,10 +1,14 @@
-package com.foureyedstraighthair.ticks.inlime
+package com.foureyedstraighthair.ticks.jam
 
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.ViewGroup
+import com.foureyedstraighthair.ticks.jam.internal.Builder
+import com.foureyedstraighthair.ticks.jam.internal.Constant
+import com.foureyedstraighthair.ticks.jam.internal.StateHolder
+import com.foureyedstraighthair.ticks.jam.internal.TriggerEvent
 
-class Inlime internal constructor(
+class Jam internal constructor(
     triggerViews: List<View>,
     targetViews: List<View>,
     animatorViews: List<InlineAnimator>) {
@@ -111,7 +115,7 @@ class Inlime internal constructor(
         fun setup(layout: View)
                 = Builder().createFrom(layout)
 
-        fun setup(activity: AppCompatActivity, layout: Int): Inlime {
+        fun setup(activity: AppCompatActivity, layout: Int): Jam {
             activity.setContentView(layout)
             val rootView = activity
                 .findViewById<ViewGroup>(android.R.id.content)

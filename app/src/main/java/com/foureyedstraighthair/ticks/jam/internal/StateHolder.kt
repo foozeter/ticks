@@ -1,6 +1,6 @@
-package com.foureyedstraighthair.ticks.inlime
+package com.foureyedstraighthair.ticks.jam.internal
 
-data class StateHolder(
+internal data class StateHolder(
     private var value: String) {
 
     fun set(value: String) {

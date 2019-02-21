@@ -1,4 +1,4 @@
-package com.foureyedstraighthair.ticks.inlime
+package com.foureyedstraighthair.ticks.jam
 
 import android.animation.Animator
 

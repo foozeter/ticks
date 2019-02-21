@@ -1,4 +1,4 @@
-package com.foureyedstraighthair.ticks.inlime
+package com.foureyedstraighthair.ticks.jam
 
 import android.animation.Animator
 import android.animation.AnimatorInflater
@@ -7,10 +7,13 @@ import android.animation.ValueAnimator
 import android.os.Build
 import android.util.Log
 import android.view.View
+import com.foureyedstraighthair.ticks.jam.internal.StateHolder
+import com.foureyedstraighthair.ticks.jam.internal.TriggerEvent
 import java.lang.ref.WeakReference
 import java.util.*
 
-class AnimatorHolder(
+class AnimatorHolder
+internal constructor(
     src: InlineAnimator,
     targetView: View?,
     private val sharedState: StateHolder?)
@@ -43,7 +46,7 @@ class AnimatorHolder(
                 addPauseListener(this@AnimatorHolder)
             }
 
-    fun fire(trigger: View, event: TriggerEvent) {
+    internal fun fire(trigger: View, event: TriggerEvent) {
         if (checkStartConditions(trigger, event)) start()
     }
 

@@ -1,4 +1,4 @@
-package com.foureyedstraighthair.ticks.inlime
+package com.foureyedstraighthair.ticks.jam
 
 import android.content.Context
 import android.support.annotation.AnimatorRes
@@ -40,32 +40,32 @@ class InlineAnimator(
         val attrs = context.obtainStyledAttributes(
             attributeSet, R.styleable.InlineAnimator, 0, 0)
 
-        var id = attrs.getResourceId(R.styleable.InlineAnimator_inlime_target, 0)
-        target = if (id > 0) id else throw InflateException("Attribute 'inlime_target' not found.")
+        var id = attrs.getResourceId(R.styleable.InlineAnimator_jam_target, 0)
+        target = if (id > 0) id else throw InflateException("Attribute 'jam_target' not found.")
 
-        id = attrs.getResourceId(R.styleable.InlineAnimator_inlime_trigger, 0)
+        id = attrs.getResourceId(R.styleable.InlineAnimator_jam_trigger, 0)
         trigger = if (id > 0) id else null
 
-        id = attrs.getResourceId(R.styleable.InlineAnimator_inlime_animator, 0)
-        animatorSrc = if (id > 0) id else throw InflateException("Attribute 'inlime_animatorSrc' not found.")
+        id = attrs.getResourceId(R.styleable.InlineAnimator_jam_animator, 0)
+        animatorSrc = if (id > 0) id else throw InflateException("Attribute 'jam_animatorSrc' not found.")
 
         allowInterruption = attrs.getBoolean(
-            R.styleable.InlineAnimator_inlime_allowInterruption, true)
+            R.styleable.InlineAnimator_jam_allowInterruption, true)
 
         repeatAtInterruption = attrs.getBoolean(
-            R.styleable.InlineAnimator_inlime_reverseAtInterruption, false)
+            R.styleable.InlineAnimator_jam_reverseAtInterruption, false)
 
         triggeredByClick = attrs.getBoolean(
-            R.styleable.InlineAnimator_inlime_triggeredByClick, false)
+            R.styleable.InlineAnimator_jam_triggeredByClick, false)
 
         triggeredByLongClick = attrs.getBoolean(
-            R.styleable.InlineAnimator_inlime_triggeredByLongClick, false)
+            R.styleable.InlineAnimator_jam_triggeredByLongClick, false)
 
-        stateName = attrs.getString(R.styleable.InlineAnimator_inlime_stateName)
+        stateName = attrs.getString(R.styleable.InlineAnimator_jam_stateName)
 
-        necessaryStateCondition = attrs.getString(R.styleable.InlineAnimator_inlime_necessaryStateCondition)
+        necessaryStateCondition = attrs.getString(R.styleable.InlineAnimator_jam_necessaryStateCondition)
 
-        nextState = attrs.getString(R.styleable.InlineAnimator_inlime_nextState)
+        nextState = attrs.getString(R.styleable.InlineAnimator_jam_nextState)
 
         attrs.recycle()
 

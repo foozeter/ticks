@@ -24,28 +24,28 @@
                android:layout_gravity="center"
                android:id="@+id/img"/>
 
-    <com.foureyedstraighthair.ticks.inlime.InlineAnimator
+    <com.foureyedstraighthair.ticks.jam.InlineAnimator
             android:id="@+id/anim_a"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:inlime_target="@id/img"
-            app:inlime_trigger="@id/button"
-            app:inlime_animator="@animator/test_animator_2"
-            app:inlime_allowInterruption="false"
-            app:inlime_triggeredByClick="true"
-            app:inlime_triggeredByLongClick="true"/>
+            app:jam_target="@id/img"
+            app:jam_trigger="@id/button"
+            app:jam_animator="@animator/test_animator_2"
+            app:jam_allowInterruption="false"
+            app:jam_triggeredByClick="true"
+            app:jam_triggeredByLongClick="true"/>
 
     <!--<com.foureyedstraighthair.ticks.inlime.InlineAnimator-->
             <!--android:id="@+id/anim_b"-->
             <!--android:layout_width="wrap_content"-->
             <!--android:layout_height="wrap_content"-->
-            <!--app:inlime_target="@id/img"-->
-            <!--app:inlime_trigger="@id/button"-->
-            <!--app:inlime_animator="@animator/test_animator"-->
-            <!--app:inlime_stateName="state_img"-->
-            <!--app:inlime_necessaryStateCondition="moved"-->
-            <!--app:inlime_nextState="initial"-->
-            <!--app:inlime_repeatAtInterruption="true"-->
-            <!--app:inlime_triggeredByClick="true"/>-->
+            <!--app:jam_target="@id/img"-->
+            <!--app:jam_trigger="@id/button"-->
+            <!--app:jam_animator="@animator/test_animator"-->
+            <!--app:jam_stateName="state_img"-->
+            <!--app:jam_necessaryStateCondition="moved"-->
+            <!--app:jam_nextState="initial"-->
+            <!--app:jam_repeatAtInterruption="true"-->
+            <!--app:jam_triggeredByClick="true"/>-->
 
 </FrameLayout>

@@ -3,8 +3,7 @@ package com.foureyedstraighthair.ticks
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import com.foureyedstraighthair.ticks.inlime.Inlime
-import kotlinx.android.synthetic.main.activity_test.*
+import com.foureyedstraighthair.ticks.jam.Jam
 
 class TestActivity : AppCompatActivity() {
 
@@ -17,15 +16,6 @@ class TestActivity : AppCompatActivity() {
 //        img.pivotX = 0.5f
 //        img.pivotY = 0.5f
 
-        val listener = object: InlineAnimationCallback() {
-            override fun onAnimationStart(animation: Anim) {
-                Log.d("mylog", "onStart : (left, top) = (${img.left}, ${img.top})")
-            }
-
-            override fun onAnimationEnd(animation: Anim) {
-                Log.d("mylog", "onEnd : (left, top) = (${img.left}, ${img.top})")
-            }
-        }
 
 //        jam.setAnimationCallbackOf(R.id.anim_1, listener)
 //        jam.setAnimationCallbackOf(R.id.anim_2, listener)
@@ -39,7 +29,7 @@ class TestActivity : AppCompatActivity() {
 //            Log.d("mylog", "getX=${img.x}, getY=${img.y}")
 //        }
 
-        val inlime = Inlime.setup(this, R.layout.activity_test)
+        val inlime = Jam.setup(this, R.layout.activity_test)
         inlime.setTriggerViewOnLongClickListener(0) {
             Log.d("mylog", "onClick")
         }
